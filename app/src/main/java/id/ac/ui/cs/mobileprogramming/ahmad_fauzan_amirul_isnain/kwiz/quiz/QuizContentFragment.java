@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -18,7 +19,7 @@ import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class QuizContentFragment extends Fragment implements View.OnClickListener {
+public class QuizContentFragment extends Fragment {
 
     private TextView answerTextView;
     private RadioButton previousButton;
@@ -38,47 +39,49 @@ public class QuizContentFragment extends Fragment implements View.OnClickListene
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        view.findViewById(R.id.radio_a).setOnClickListener(this);
-        view.findViewById(R.id.radio_b).setOnClickListener(this);
-        view.findViewById(R.id.radio_c).setOnClickListener(this);
-        view.findViewById(R.id.radio_d).setOnClickListener(this);
-    }
+        View.OnClickListener radioButtonClickListener = (new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                boolean checked = ((RadioButton) view).isChecked();
 
-    @Override
-    public void onClick(View view) {
-        boolean checked = ((RadioButton) view).isChecked();
+                switch(view.getId()) {
+                    case R.id.radio_a:
+                        if (checked)
+                            clearPreviousRadioButton(view, R.id.radio_a);
+                        answerTextView = view.findViewById(R.id.option_a_text);
+                        break;
 
-        switch(view.getId()) {
-            case R.id.radio_a:
-                if (checked)
-                    clearPreviousRadioButton(view, R.id.radio_a);
-                    answerTextView = view.findViewById(R.id.option_a_text);
-                    break;
+                    case R.id.radio_b:
+                        if (checked)
+                            clearPreviousRadioButton(view, R.id.radio_b);
+                        answerTextView = view.findViewById(R.id.option_b_text);
+                        break;
 
-            case R.id.radio_b:
-                if (checked)
-                    clearPreviousRadioButton(view, R.id.radio_b);
-                    answerTextView = view.findViewById(R.id.option_b_text);
-                    break;
+                    case R.id.radio_c:
+                        if (checked)
+                            clearPreviousRadioButton(view, R.id.radio_c);
+                        answerTextView = view.findViewById(R.id.option_c_text);
+                        break;
 
-            case R.id.radio_c:
-                if (checked)
-                    clearPreviousRadioButton(view, R.id.radio_c);
-                    answerTextView = view.findViewById(R.id.option_c_text);
-                    break;
+                    case R.id.radio_d:
+                        if (checked)
+                            clearPreviousRadioButton(view, R.id.radio_d);
+                        answerTextView = view.findViewById(R.id.option_d_text);
+                        break;
+                }
+            }
 
-            case R.id.radio_d:
-                if (checked)
-                    clearPreviousRadioButton(view, R.id.radio_d);
-                    answerTextView = view.findViewById(R.id.option_d_text);
-                    break;
-        }
-    }
+            private void clearPreviousRadioButton(View view, int radioButtonId){
+                if (previousButton!=null){
+                    previousButton.setChecked(false);
+                }
+                previousButton = view.findViewById(radioButtonId);
+            }
+        });
 
-    protected void clearPreviousRadioButton(View view, int radioButtonId){
-        if (previousButton!=null){
-            previousButton.setChecked(false);
-        }
-        previousButton = view.findViewById(radioButtonId);
+        view.findViewById(R.id.radio_a).setOnClickListener(radioButtonClickListener);
+        view.findViewById(R.id.radio_b).setOnClickListener(radioButtonClickListener);
+        view.findViewById(R.id.radio_c).setOnClickListener(radioButtonClickListener);
+        view.findViewById(R.id.radio_d).setOnClickListener(radioButtonClickListener);
     }
 }
