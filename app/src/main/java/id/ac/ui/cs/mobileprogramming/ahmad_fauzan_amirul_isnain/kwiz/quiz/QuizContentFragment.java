@@ -10,6 +10,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,38 +50,47 @@ public class QuizContentFragment extends Fragment {
             public void onClick(View view) {
                 boolean checked = ((RadioButton) view).isChecked();
 
+                if (previousButton != null && previousButton.getId() == view.getId()){
+                    answerTextView = null;
+                    previousButton.setChecked(false);
+                    previousButton = null;
+                    return;
+                }
+
+                changePreviousButton(view);
+
                 switch(view.getId()) {
                     case R.id.radio_a:
-                        if (checked)
-                            clearPreviousRadioButton(view, R.id.radio_a);
-                        answerTextView = getView().findViewById(R.id.option_a_text);
+                        if (checked) {
+                            answerTextView = getView().findViewById(R.id.option_a_text);
+                        }
                         break;
 
                     case R.id.radio_b:
-                        if (checked)
-                            clearPreviousRadioButton(view, R.id.radio_b);
-                        answerTextView = getView().findViewById(R.id.option_b_text);
+                        if (checked) {
+                            answerTextView = getView().findViewById(R.id.option_b_text);
+                        }
                         break;
 
                     case R.id.radio_c:
-                        if (checked)
-                            clearPreviousRadioButton(view, R.id.radio_c);
-                        answerTextView = getView().findViewById(R.id.option_c_text);
+                        if (checked) {
+                            answerTextView = getView().findViewById(R.id.option_c_text);
+                        }
                         break;
 
                     case R.id.radio_d:
-                        if (checked)
-                            clearPreviousRadioButton(view, R.id.radio_d);
-                        answerTextView = getView().findViewById(R.id.option_d_text);
+                        if (checked) {
+                            answerTextView = getView().findViewById(R.id.option_d_text);
+                        }
                         break;
                 }
             }
 
-            private void clearPreviousRadioButton(View view, int radioButtonId){
-                if (previousButton!=null){
+            private void changePreviousButton(View view){
+                if (previousButton != null){
                     previousButton.setChecked(false);
                 }
-                previousButton = getView().findViewById(radioButtonId);
+                previousButton = (RadioButton) view;
             }
         });
 
@@ -122,5 +132,11 @@ public class QuizContentFragment extends Fragment {
                 });
 
         alertDialog.show();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        previousButton = getView().findViewById(previousButton.getId());
     }
 }
