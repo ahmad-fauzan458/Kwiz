@@ -37,5 +37,11 @@ public class QuizHeaderFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        Intent intent = getActivity().getIntent();
+        usernameTextView = getView().findViewById(R.id.usernameTextView);
+        String namePointer = getContext().getString(R.string.name_pointer);
+        usernameTextView.setText(String.format("%s %s", namePointer,
+                intent.getStringExtra("username")));
     }
 }
