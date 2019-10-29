@@ -1,7 +1,9 @@
 package id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.quiz;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.R;
@@ -24,5 +26,25 @@ public class QuizActivity extends AppCompatActivity {
                         .commit();
             }
         }
+    }
+
+    public void onBackPressed() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(QuizActivity.this);
+        alertDialog.setTitle("Illegal Move");
+        alertDialog.setMessage("Back button is disabled, please use back button on the app display." +
+                "If there isn't any back button, it means you can't go back at current situation.");
+
+        alertDialog.setNegativeButton("Back to quiz",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+        alertDialog.show();
+    }
+
+    public void back(){
+        super.onBackPressed();
     }
 }

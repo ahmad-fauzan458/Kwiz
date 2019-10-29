@@ -50,7 +50,8 @@ public class AnswerConfirmationFragment extends Fragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().onBackPressed();
+                QuizActivity quizActivity = (QuizActivity)getActivity();
+                quizActivity.back();
             }
         });
 

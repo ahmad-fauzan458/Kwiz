@@ -1,10 +1,12 @@
 package id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.quiz;
 
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -93,6 +95,10 @@ public class QuizContentFragment extends Fragment {
         getView().findViewById(R.id.submit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (answerTextView == null) {
+                    showErrorAnswerNotChosen();
+                    return;
+                }
                 viewModel.setNote(noteEditText.getText().toString());
                 viewModel.setAnswer(answerTextView.getText().toString());
                 getFragmentManager().beginTransaction()
@@ -101,5 +107,20 @@ public class QuizContentFragment extends Fragment {
                         .commit();
             }
         });
+    }
+
+    private void showErrorAnswerNotChosen(){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+        alertDialog.setTitle("No answer");
+        alertDialog.setMessage("The answer is still empty, please choose the answer first");
+
+        alertDialog.setNegativeButton("Back to quiz",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+        alertDialog.show();
     }
 }
