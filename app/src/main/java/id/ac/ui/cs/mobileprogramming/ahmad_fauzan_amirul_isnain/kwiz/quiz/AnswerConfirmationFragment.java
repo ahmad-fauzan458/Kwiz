@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProviders;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.R;
@@ -21,6 +22,8 @@ public class AnswerConfirmationFragment extends Fragment {
     private QuizContentViewModel viewModel;
     private TextView yourAnswerText;
     private TextView yourNoteText;
+    private Button back;
+    private Button next;
 
     public static AnswerConfirmationFragment newInstance() {
         return new AnswerConfirmationFragment();
@@ -42,5 +45,24 @@ public class AnswerConfirmationFragment extends Fragment {
 
         yourNoteText = getView().findViewById(R.id.yourNoteText);
         yourNoteText.setText(viewModel.getNote());
+
+        back = getView().findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().onBackPressed();
+            }
+        });
+
+        next = getView().findViewById(R.id.next);
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.quizContent, QuizContentFragment.newInstance())
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
     }
 }
