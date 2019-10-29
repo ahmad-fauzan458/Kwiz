@@ -41,5 +41,38 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        startButton = getView().findViewById(R.id.startButton);
+        leaderboardButton = getView().findViewById(R.id.leaderboardButton);
+        exitButton = getView().findViewById(R.id.exitButton);
+
+        leaderboardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.activityMain, LeaderboardFragment.newInstance())
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+
+        exitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().finish();
+            }
+        });
+
+        startButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), QuizActivity.class);
+                usernameEditText = getView().findViewById(R.id.usernameEditText);
+                intent.putExtra("username", usernameEditText.getText().toString());
+                startActivity(intent);
+            }
+        });
+
+
     }
 }
