@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Kwiz</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="ready_to_take_quiz">Ready to take quiz?</string>
+    <string name="fill_thix_box_with_your_name">Fill thix box with your name ...</string>
+    <string name="start">Start</string>
+    <string name="leaderboard">Leaderboard</string>
+    <string name="exit">Exit</string>
+    <string name="option_a">A</string>
+    <string name="option_b">B</string>
+    <string name="option_c">C</string>
+    <string name="option_d">D</string>
+    <string name="name_pointer">Name:</string>
+    <string name="additional_note">Additional note ...</string>
+    <string name="submit">Submit</string>
+    <string name="your_answer_is">Your answer is :</string>
+    <string name="your_additional_note_is">Your additional note is :</string>
+    <string name="answer">Answer</string>
+    <string name="next">Next</string>
+    <string name="back">Back</string>
+</resources>
