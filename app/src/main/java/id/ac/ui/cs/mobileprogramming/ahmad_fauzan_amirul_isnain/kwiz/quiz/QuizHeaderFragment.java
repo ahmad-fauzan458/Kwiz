@@ -14,13 +14,18 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.R;
+import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.TimerAsync;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class QuizHeaderFragment extends Fragment {
 
+    private final int TIME = 10;
+
     private TextView usernameTextView;
+    private TextView timerTextView;
+    private TimerAsync timerAsync;
 
     public static QuizHeaderFragment newInstance() {
         return new QuizHeaderFragment();
@@ -43,5 +48,13 @@ public class QuizHeaderFragment extends Fragment {
         String namePointer = getContext().getString(R.string.name_pointer);
         usernameTextView.setText(String.format("%s %s", namePointer,
                 intent.getStringExtra("username")));
+
+        timerTextView = getView().findViewById(R.id.timerTextView);
+        timerAsync = new TimerAsync(this, TIME);
+        timerAsync.execute();
+    }
+
+    public void setTimerDisplay(int i){
+        timerTextView.setText(String.format("Time: %s", i));
     }
 }
