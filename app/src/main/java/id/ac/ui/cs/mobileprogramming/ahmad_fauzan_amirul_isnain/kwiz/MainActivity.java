@@ -16,10 +16,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        networkChangeReceiver = new NetworkChangeReceiver();
-        registerReceiver(networkChangeReceiver,
-                new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
-
         if (findViewById(R.id.activityMain)!= null) {
             if (savedInstanceState == null) {
                 getSupportFragmentManager().beginTransaction()
@@ -27,5 +23,19 @@ public class MainActivity extends AppCompatActivity {
                         .commit();
             }
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        unregisterReceiver(networkChangeReceiver);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        networkChangeReceiver = new NetworkChangeReceiver();
+        registerReceiver(networkChangeReceiver,
+                new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
     }
 }
