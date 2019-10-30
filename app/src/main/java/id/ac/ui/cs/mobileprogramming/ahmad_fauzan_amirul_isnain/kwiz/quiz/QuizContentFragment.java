@@ -137,6 +137,8 @@ public class QuizContentFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        previousButton = getView().findViewById(previousButton.getId());
+        if (previousButton != null) {
+            previousButton = getView().findViewById(previousButton.getId());
+        }
     }
 }
