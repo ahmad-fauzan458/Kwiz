@@ -35,11 +35,10 @@ public class QuizActivity extends AppCompatActivity {
 
     public void onBackPressed() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(QuizActivity.this);
-        alertDialog.setTitle("Illegal Move");
-        alertDialog.setMessage("Back button is disabled, please use back button on the app display." +
-                "If there isn't any back button, it means you can't go back at current situation.");
+        alertDialog.setTitle(getResources().getString(R.string.back_button_disabled));
+        alertDialog.setMessage(getResources().getString(R.string.back_button_disabled_content));
 
-        alertDialog.setNegativeButton("Back to quiz",
+        alertDialog.setNegativeButton(getResources().getString(R.string.back_to_quiz),
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();

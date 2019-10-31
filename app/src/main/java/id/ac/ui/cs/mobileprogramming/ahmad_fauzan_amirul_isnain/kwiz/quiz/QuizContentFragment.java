@@ -10,7 +10,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -121,10 +120,10 @@ public class QuizContentFragment extends Fragment {
 
     private void showErrorAnswerNotChosen(){
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
-        alertDialog.setTitle("No answer");
-        alertDialog.setMessage("The answer is still empty, please choose the answer first");
+        alertDialog.setTitle(getResources().getString(R.string.no_answer));
+        alertDialog.setMessage(getResources().getString(R.string.no_answer_content));
 
-        alertDialog.setNegativeButton("Back to quiz",
+        alertDialog.setNegativeButton(getResources().getString(R.string.back_to_quiz),
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();

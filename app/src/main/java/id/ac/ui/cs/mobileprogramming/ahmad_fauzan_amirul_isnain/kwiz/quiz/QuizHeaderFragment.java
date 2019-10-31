@@ -55,6 +55,7 @@ public class QuizHeaderFragment extends Fragment {
     }
 
     public void setTimerDisplay(int i){
-        timerTextView.setText(String.format("Time: %s", i));
+        timerTextView.setText(String.format("%s %s",
+                getResources().getString(R.string.time_pointer),i));
     }
 }

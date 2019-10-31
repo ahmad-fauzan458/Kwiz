@@ -36,7 +36,7 @@
     <Button
         android:id="@+id/startButton"
         android:layout_width="140dp"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_marginTop="68dp"
         android:text="@string/start"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,7 +47,7 @@
     <Button
         android:id="@+id/exitButton"
         android:layout_width="140dp"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_marginTop="12dp"
         android:text="@string/exit"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -60,7 +60,7 @@
     <Button
         android:id="@+id/leaderboardButton"
         android:layout_width="140dp"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_marginTop="12dp"
         android:text="@string/leaderboard"
         app:layout_constraintEnd_toEndOf="parent"

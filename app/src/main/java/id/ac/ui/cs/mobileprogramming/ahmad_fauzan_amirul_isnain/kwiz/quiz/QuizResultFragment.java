@@ -12,7 +12,6 @@ import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
 import android.os.Environment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,7 +86,6 @@ public class QuizResultFragment extends Fragment {
             out.close();
         } catch (Exception e) {
             e.printStackTrace();
-            Log.d("AHEM", "AHEM");
         }
 
         return file.getPath();
@@ -100,10 +98,10 @@ public class QuizResultFragment extends Fragment {
 
         Intent shareIntent = new Intent();
         shareIntent.setAction(Intent.ACTION_SEND);
-        shareIntent.putExtra(Intent.EXTRA_TEXT, "I got a medal on Kwiz");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.got_medal));
         shareIntent.putExtra(Intent.EXTRA_STREAM, path);
         shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         shareIntent.setType("image/*");
-        startActivity(Intent.createChooser(shareIntent, "Share..."));
+        startActivity(Intent.createChooser(shareIntent, getResources().getString(R.string.share)));
     }
 }

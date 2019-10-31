@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">Kwiz</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="ready_to_take_quiz">Siap untuk memulai kuis?</string>
+    <string name="fill_thix_box_with_your_name">Isi kotak ini dengan namamu...</string>
+    <string name="start">Mulai</string>
+    <string name="leaderboard">Papan Peringkat</string>
+    <string name="exit">Keluar</string>
+    <string name="option_a">A</string>
+    <string name="option_b">B</string>
+    <string name="option_c">C</string>
+    <string name="option_d">D</string>
+    <string name="name_pointer">Nama:</string>
+    <string name="additional_note">Catatan tambahan...</string>
+    <string name="submit">Kirim</string>
+    <string name="your_answer_is">Jawabanmu adalah :</string>
+    <string name="your_additional_note_is">Catatan tambahanmu adalah :</string>
+    <string name="answer">Jawaban</string>
+    <string name="next">Lanjut</string>
+    <string name="back">Kembali</string>
+    <string name="your_score">Skormu:</string>
+    <string name="name_placeholder">Nama...</string>
+    <string name="score_placeholder">Skor...</string>
+    <string name="medal_text_placeholder">Kamu mendapatkan medali [nama_medali]!</string>
+    <string name="home">Beranda</string>
+    <string name="share">Bagikan</string>
+    <string name="time_pointer">Waktu:</string>
+    <string name="got_medal">Saya dapat medali di Kwiz</string>
+    <string name="connectivity_wifi">Wifi tersedia</string>
+    <string name="connectivity_mobile_data">Mobile data tersedia</string>
+    <string name="connectivity_nothing">Tidak ada jaringan</string>
+    <string name="no_answer">Tidak ada jawaban</string>
+    <string name="no_answer_content">Jawaban masih kosong, silakan pilih jawaban</string>
+    <string name="back_to_quiz">Kembali ke kuis</string>
+    <string name="back_button_disabled">Tombol kembali dinonaktifkan</string>
+    <string name="back_button_disabled_content">
+    Silakan gunakan tombol kembali pada layar aplikasi.
+    Jika tidak ada, hal tersebut berarti kamu tidak bisa kembali pada saat ini.
+    </string>
+</resources>
