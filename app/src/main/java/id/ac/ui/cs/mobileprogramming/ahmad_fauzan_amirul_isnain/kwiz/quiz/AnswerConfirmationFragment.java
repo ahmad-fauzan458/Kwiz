@@ -60,7 +60,7 @@ public class AnswerConfirmationFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 getFragmentManager().beginTransaction()
-                        .replace(R.id.quizContent, QuizContentFragment.newInstance())
+                        .replace(R.id.quizContent, QuizResultFragment.newInstance())
                         .addToBackStack(null)
                         .commit();
             }

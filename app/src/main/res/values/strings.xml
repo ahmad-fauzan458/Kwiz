@@ -20,7 +20,7 @@
     <string name="answer">Answer</string>
     <string name="next">Next</string>
     <string name="back">Back</string>
-    <string name="your_result">Your Result:</string>
+    <string name="your_score">Your Score:</string>
     <string name="name_placeholder">Name...</string>
     <string name="score_placeholder">Score...</string>
     <string name="medal_text_placeholder">You got [medal_name] medal!</string>
