@@ -51,18 +51,4 @@ public class QuizActivity extends AppCompatActivity {
     public void back(){
         super.onBackPressed();
     }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        unregisterReceiver(networkChangeReceiver);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        networkChangeReceiver = new NetworkChangeReceiver();
-        registerReceiver(networkChangeReceiver,
-                new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
-    }
 }
