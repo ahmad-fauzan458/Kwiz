@@ -5,7 +5,7 @@
     android:id="@+id/fragmentAnswerConfirmation"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".quiz.QuizContentFragment">
+    tools:context=".quiz.AnswerConfirmationFragment">
 
     <Button
         android:id="@+id/back"
