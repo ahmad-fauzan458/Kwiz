@@ -1,9 +1,6 @@
 package id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.quiz;
 
-import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -11,7 +8,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
@@ -26,7 +22,7 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.R;
-import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.WriteStoragePermissions;
+import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.ExternalStoragePermissions;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,7 +55,7 @@ public class QuizResultFragment extends Fragment {
             }
         });
 
-        WriteStoragePermissions.verifyStoragePermissions(getActivity());
+        ExternalStoragePermissions.verifyStoragePermissions(getActivity());
 
         medalGold = createImageOnData(R.drawable.medal_gold);
         medalSilver = createImageOnData(R.drawable.medal_silver);
