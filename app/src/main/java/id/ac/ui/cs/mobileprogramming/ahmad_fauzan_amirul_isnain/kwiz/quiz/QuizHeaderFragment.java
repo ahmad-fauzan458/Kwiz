@@ -2,6 +2,7 @@ package id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.quiz;
 
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -57,5 +58,13 @@ public class QuizHeaderFragment extends Fragment {
     public void setTimerDisplay(int i){
         timerTextView.setText(String.format("%s %s",
                 getResources().getString(R.string.time_pointer),i));
+    }
+
+    @Override
+    public void onDestroy() {
+        if (timerAsync != null && timerAsync.getStatus() != AsyncTask.Status.FINISHED){
+            timerAsync.cancel(true);
+        }
+        super.onDestroy();
     }
 }
