@@ -84,4 +84,10 @@ public class QuizHeaderFragment extends Fragment {
             timerAsync.cancel(true);
         }
     }
+
+    public void timeIsUp(){
+        getFragmentManager().beginTransaction()
+                .replace(R.id.quizContent, QuizResultFragment.newInstance())
+                .commit();
+    }
 }

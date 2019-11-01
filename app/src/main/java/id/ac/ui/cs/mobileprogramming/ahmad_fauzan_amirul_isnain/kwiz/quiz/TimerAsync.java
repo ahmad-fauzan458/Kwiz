@@ -41,4 +41,10 @@ public class TimerAsync extends AsyncTask<Void, Integer, Integer> {
             TimeUnit.SECONDS.sleep(1);
         } catch (InterruptedException ignore) {}
     }
+
+    @Override
+    protected void onPostExecute(Integer integer) {
+        super.onPostExecute(integer);
+        quizHeaderFragment.timeIsUp();
+    }
 }
