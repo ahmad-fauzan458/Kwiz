@@ -1,6 +1,5 @@
 package id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.quiz;
 
-
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -15,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.R;
-import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.TimerAsync;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,11 +25,22 @@ public class QuizHeaderFragment extends Fragment {
     private TextView usernameTextView;
     private TextView timerTextView;
     private TimerAsync timerAsync;
+    private int timeRemain;
+    private String username;
 
     public static QuizHeaderFragment newInstance() {
         return new QuizHeaderFragment();
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        timeRemain = TIME;
+        timerAsync = new TimerAsync(this, TIME);
+
+        Intent intent = getActivity().getIntent();
+        username = intent.getStringExtra("username");
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,27 +53,35 @@ public class QuizHeaderFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Intent intent = getActivity().getIntent();
+        setRetainInstance(true);
+
         usernameTextView = getView().findViewById(R.id.usernameTextView);
         String namePointer = getContext().getString(R.string.name_pointer);
-        usernameTextView.setText(String.format("%s %s", namePointer,
-                intent.getStringExtra("username")));
+        usernameTextView.setText(String.format("%s %s", namePointer, username));
 
         timerTextView = getView().findViewById(R.id.timerTextView);
-        timerAsync = new TimerAsync(this, TIME);
-        timerAsync.execute();
+        setTimerDisplay(timeRemain);
+
+        if (timerAsync.getStatus() == AsyncTask.Status.PENDING){
+            timerAsync.execute();
+        }
     }
 
     public void setTimerDisplay(int i){
+        timeRemain = i;
         timerTextView.setText(String.format("%s %s",
-                getResources().getString(R.string.time_pointer),i));
+                getResources().getString(R.string.time_pointer),timeRemain));
     }
 
     @Override
     public void onDestroy() {
-        if (timerAsync != null && timerAsync.getStatus() != AsyncTask.Status.FINISHED){
+        stopTimer();
+        super.onDestroy();
+    }
+
+    private  void stopTimer(){
+        if (timerAsync.getStatus() != AsyncTask.Status.FINISHED){
             timerAsync.cancel(true);
         }
-        super.onDestroy();
     }
 }

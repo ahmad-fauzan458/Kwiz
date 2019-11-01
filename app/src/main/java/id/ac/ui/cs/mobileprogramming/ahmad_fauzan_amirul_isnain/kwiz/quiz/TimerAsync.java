@@ -1,4 +1,4 @@
-package id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz;
+package id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.quiz;
 
 import android.os.AsyncTask;
 import android.widget.TextView;
@@ -20,10 +20,14 @@ public class TimerAsync extends AsyncTask<Void, Integer, Integer> {
     @Override
     protected Integer doInBackground(Void... voids) {
         while (time > 0) {
+            if(isCancelled()){
+                return time;
+            }
             publishProgress(time);
             sleepSecond();
             time--;
         }
+        publishProgress(time);
         return time;
     }
 
