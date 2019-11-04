@@ -15,9 +15,6 @@ import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.UserViewModel;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.databinding.FragmentQuizHeaderBinding;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class QuizHeaderFragment extends Fragment {
 
     private TimerViewModel timerViewModel;

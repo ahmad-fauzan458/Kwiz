@@ -25,9 +25,6 @@ import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.util.Extern
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.databinding.FragmentQuizResultBinding;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.interfaces.QuizResultInterface;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class QuizResultFragment extends Fragment implements QuizResultInterface {
 
     private String medalGold;
