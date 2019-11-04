@@ -11,7 +11,7 @@
     <string name="option_b">B</string>
     <string name="option_c">C</string>
     <string name="option_d">D</string>
-    <string name="name_pointer">Name:</string>
+    <string name="name_pointer">Name: %s</string>
     <string name="additional_note">Additional note ...</string>
     <string name="submit">Submit</string>
     <string name="your_answer_is">Your answer is :</string>
@@ -25,7 +25,7 @@
     <string name="medal_text_placeholder">You got [medal_name] medal!</string>
     <string name="home">Home</string>
     <string name="share">Share</string>
-    <string name="time_pointer">Time:</string>
+    <string name="time_pointer">Time: %s</string>
     <string name="got_medal">I got a medal on Kwiz</string>
     <string name="connectivity_wifi">Wifi available</string>
     <string name="connectivity_mobile_data">Mobile data available</string>
