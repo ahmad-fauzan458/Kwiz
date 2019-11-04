@@ -71,12 +71,15 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     public void startTimer(){
-        timerViewModel.setTimerAsync(QuizActivity.QUIZ_TIME);
-        timerViewModel.getTimerAsync().execute();
+        if (timerViewModel != null) {
+            timerViewModel.setTimerAsync(QuizActivity.QUIZ_TIME);
+            timerViewModel.getTimerAsync().execute();
+        }
     }
 
     public  void stopTimer(){
-        if (timerViewModel.getTimerAsync().getStatus() != AsyncTask.Status.FINISHED){
+        if (timerViewModel != null
+                && timerViewModel.getTimerAsync().getStatus() != AsyncTask.Status.FINISHED){
             timerViewModel.getTimerAsync().cancel(true);
         }
     }
