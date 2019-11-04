@@ -1,11 +1,15 @@
 package id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.quiz;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.content.DialogInterface;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.NetworkChangeReceiver;
@@ -13,7 +17,10 @@ import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.R;
 
 public class QuizActivity extends AppCompatActivity {
 
+    public static final Integer QUIZ_TIME = 10;
+
     private NetworkChangeReceiver networkChangeReceiver;
+    private TimerViewModel timerViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +29,17 @@ public class QuizActivity extends AppCompatActivity {
 
         QuizHeaderFragment quizHeaderFragment = QuizHeaderFragment.newInstance();
         quizHeaderFragment.setArguments(getIntent().getExtras());
+
+        timerViewModel = ViewModelProviders.of(this).get(TimerViewModel.class);
+        final Observer<Boolean> timerFinishedObserver = new Observer<Boolean>() {
+            @Override
+            public void onChanged(@Nullable final Boolean newTimerFinished) {
+                if (newTimerFinished != null && newTimerFinished) {
+                    showQuizResult();
+                }
+            }
+        };
+        timerViewModel.getTimerFinished().observe(this, timerFinishedObserver);
 
         if (findViewById(R.id.quizHeader)!= null && findViewById(R.id.quizContent)!= null) {
             if (savedInstanceState == null) {
@@ -50,5 +68,22 @@ public class QuizActivity extends AppCompatActivity {
 
     public void back(){
         super.onBackPressed();
+    }
+
+    public void startTimer(){
+        timerViewModel.setTimerAsync(QuizActivity.QUIZ_TIME);
+        timerViewModel.getTimerAsync().execute();
+    }
+
+    public  void stopTimer(){
+        if (timerViewModel.getTimerAsync().getStatus() != AsyncTask.Status.FINISHED){
+            timerViewModel.getTimerAsync().cancel(true);
+        }
+    }
+
+    private void showQuizResult(){
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.quizContent, QuizResultFragment.newInstance())
+                .commit();
     }
 }

@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Environment;
 import android.view.LayoutInflater;
@@ -39,6 +40,8 @@ public class QuizResultFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        QuizActivity quizActivity = (QuizActivity) getActivity();
+        quizActivity.stopTimer();
     }
 
     @Override

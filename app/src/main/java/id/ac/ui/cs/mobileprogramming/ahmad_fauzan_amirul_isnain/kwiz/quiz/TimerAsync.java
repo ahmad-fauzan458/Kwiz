@@ -1,20 +1,16 @@
 package id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.quiz;
 
 import android.os.AsyncTask;
-import android.widget.TextView;
 
 import java.util.concurrent.TimeUnit;
 
-import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.quiz.QuizContentFragment;
-import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.quiz.QuizHeaderFragment;
-
 public class TimerAsync extends AsyncTask<Void, Integer, Integer> {
-    private int time;
-    private QuizHeaderFragment quizHeaderFragment;
+    private Integer time;
+    private TimerViewModel timerViewModel;
 
-    public TimerAsync(QuizHeaderFragment quizHeaderFragment, int time) {
+    public TimerAsync(TimerViewModel timerViewModel, Integer time) {
         this.time = time;
-        this.quizHeaderFragment = quizHeaderFragment;
+        this.timerViewModel = timerViewModel;
     }
 
     @Override
@@ -33,7 +29,7 @@ public class TimerAsync extends AsyncTask<Void, Integer, Integer> {
 
     @Override
     protected void onProgressUpdate(Integer... values) {
-        quizHeaderFragment.setTimerDisplay(values[0]);
+        timerViewModel.setTime(values[0]);
     }
 
     private void sleepSecond() {
@@ -45,6 +41,6 @@ public class TimerAsync extends AsyncTask<Void, Integer, Integer> {
     @Override
     protected void onPostExecute(Integer integer) {
         super.onPostExecute(integer);
-        quizHeaderFragment.timeIsUp();
+        timerViewModel.setTimerFinished(true);
     }
 }

@@ -1,5 +1,6 @@
 package id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.quiz;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -7,6 +8,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,13 +23,11 @@ import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.R;
  */
 public class QuizHeaderFragment extends Fragment {
 
-    private final int TIME = 10;
-
     private TextView usernameTextView;
     private TextView timerTextView;
-    private TimerAsync timerAsync;
-    private int timeRemain;
+    private Integer timeRemain;
     private String username;
+    private TimerViewModel timerViewModel;
 
     public static QuizHeaderFragment newInstance() {
         return new QuizHeaderFragment();
@@ -35,8 +36,21 @@ public class QuizHeaderFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        timeRemain = TIME;
-        timerAsync = new TimerAsync(this, TIME);
+
+        setRetainInstance(true);
+
+        QuizActivity quizActivity = (QuizActivity) getActivity();
+
+        timerViewModel = ViewModelProviders.of(quizActivity).get(TimerViewModel.class);
+        final Observer<Integer> timeObserver = new Observer<Integer>() {
+            @Override
+            public void onChanged(@Nullable final Integer newTime) {
+                setTimerDisplay(newTime);
+            }
+        };
+        timerViewModel.getTime().observe(this, timeObserver);
+
+        quizActivity.startTimer();
 
         Intent intent = getActivity().getIntent();
         username = intent.getStringExtra("username");
@@ -61,13 +75,9 @@ public class QuizHeaderFragment extends Fragment {
 
         timerTextView = getView().findViewById(R.id.timerTextView);
         setTimerDisplay(timeRemain);
-
-        if (timerAsync.getStatus() == AsyncTask.Status.PENDING){
-            timerAsync.execute();
-        }
     }
 
-    public void setTimerDisplay(int i){
+    private void setTimerDisplay(Integer i){
         timeRemain = i;
         timerTextView.setText(String.format("%s %s",
                 getResources().getString(R.string.time_pointer),timeRemain));
@@ -75,19 +85,8 @@ public class QuizHeaderFragment extends Fragment {
 
     @Override
     public void onDestroy() {
-        stopTimer();
+        QuizActivity quizActivity= (QuizActivity) getActivity();
+        quizActivity.stopTimer();
         super.onDestroy();
-    }
-
-    private  void stopTimer(){
-        if (timerAsync.getStatus() != AsyncTask.Status.FINISHED){
-            timerAsync.cancel(true);
-        }
-    }
-
-    public void timeIsUp(){
-        getFragmentManager().beginTransaction()
-                .replace(R.id.quizContent, QuizResultFragment.newInstance())
-                .commit();
     }
 }
