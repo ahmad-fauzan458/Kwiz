@@ -24,16 +24,16 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
         if (activeNetwork != null) {
             if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI) {
                 toast = Toast.makeText(context,
-                        context.getResources().getString(R.string.connectivity_wifi), Toast.LENGTH_LONG);
+                        context.getResources().getString(R.string.connectivity_wifi), Toast.LENGTH_SHORT);
                 toast.show();
             } else if (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE) {
                 toast = Toast.makeText(context,
-                        context.getResources().getString(R.string.connectivity_mobile_data), Toast.LENGTH_LONG);
+                        context.getResources().getString(R.string.connectivity_mobile_data), Toast.LENGTH_SHORT);
                 toast.show();
             }
         } else {
             toast = Toast.makeText(context,
-                    context.getResources().getString(R.string.connectivity_nothing), Toast.LENGTH_LONG);
+                    context.getResources().getString(R.string.connectivity_nothing), Toast.LENGTH_SHORT);
             toast.show();
         }
     }
