@@ -3,6 +3,7 @@ package id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.quiz;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -14,6 +15,7 @@ import android.os.Bundle;
 
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.NetworkChangeReceiver;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.R;
+import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.UserViewModel;
 
 public class QuizActivity extends AppCompatActivity {
 
@@ -21,14 +23,15 @@ public class QuizActivity extends AppCompatActivity {
 
     private NetworkChangeReceiver networkChangeReceiver;
     private TimerViewModel timerViewModel;
+    private UserViewModel userViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quiz);
+        DataBindingUtil.setContentView(this, R.layout.activity_quiz);
 
-        QuizHeaderFragment quizHeaderFragment = QuizHeaderFragment.newInstance();
-        quizHeaderFragment.setArguments(getIntent().getExtras());
+        userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
+        userViewModel.setName(getIntent().getStringExtra("username"));
 
         timerViewModel = ViewModelProviders.of(this).get(TimerViewModel.class);
         final Observer<Boolean> timerFinishedObserver = new Observer<Boolean>() {
@@ -41,16 +44,15 @@ public class QuizActivity extends AppCompatActivity {
         };
         timerViewModel.getTimerFinished().observe(this, timerFinishedObserver);
 
-        if (findViewById(R.id.quizHeader)!= null && findViewById(R.id.quizContent)!= null) {
-            if (savedInstanceState == null) {
-                getSupportFragmentManager().beginTransaction()
-                        .add(R.id.quizHeader, quizHeaderFragment, null)
-                        .add(R.id.quizContent, QuizContentFragment.newInstance(), null)
-                        .commit();
-            }
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.quizHeader, QuizHeaderFragment.newInstance(), null)
+                    .add(R.id.quizContent, QuizContentFragment.newInstance(), null)
+                    .commit();
         }
     }
 
+    @Override
     public void onBackPressed() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(QuizActivity.this);
         alertDialog.setTitle(getResources().getString(R.string.back_button_disabled));
