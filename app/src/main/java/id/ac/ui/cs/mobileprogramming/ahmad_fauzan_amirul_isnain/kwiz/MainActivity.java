@@ -1,6 +1,7 @@
 package id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import android.content.BroadcastReceiver;
 import android.content.IntentFilter;
@@ -14,18 +15,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        DataBindingUtil.setContentView(this, R.layout.activity_main);
 
         networkChangeReceiver = new NetworkChangeReceiver();
         registerReceiver(networkChangeReceiver,
                 new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 
-        if (findViewById(R.id.activityMain)!= null) {
-            if (savedInstanceState == null) {
-                getSupportFragmentManager().beginTransaction()
-                        .add(R.id.activityMain, HomeFragment.newInstance(), null)
-                        .commit();
-            }
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.activityMain, HomeFragment.newInstance(), null)
+                    .commit();
         }
     }
 
