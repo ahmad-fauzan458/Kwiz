@@ -13,11 +13,11 @@ import androidx.lifecycle.ViewModelProviders;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.R;
+import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.databinding.FragmentQuizContentBinding;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,7 +26,6 @@ public class QuizContentFragment extends Fragment {
 
     private TextView answerTextView;
     private RadioButton previousButton;
-    private EditText noteEditText;
     private QuizContentViewModel viewModel;
 
     public static QuizContentFragment newInstance() {
@@ -37,7 +36,11 @@ public class QuizContentFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_quiz_content, container, false);
+        FragmentQuizContentBinding binding =
+                FragmentQuizContentBinding.inflate(inflater, container, false);
+        viewModel = ViewModelProviders.of(getActivity()).get(QuizContentViewModel.class);
+        binding.setQuizContentViewModel(viewModel);
+        return binding.getRoot();
     }
 
     @Override
@@ -98,9 +101,6 @@ public class QuizContentFragment extends Fragment {
         getView().findViewById(R.id.radio_c).setOnClickListener(radioButtonClickListener);
         getView().findViewById(R.id.radio_d).setOnClickListener(radioButtonClickListener);
 
-        noteEditText = getView().findViewById(R.id.noteEditText);
-        viewModel = ViewModelProviders.of(getActivity()).get(QuizContentViewModel.class);
-
         getView().findViewById(R.id.submit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,7 +108,6 @@ public class QuizContentFragment extends Fragment {
                     showErrorAnswerNotChosen();
                     return;
                 }
-                viewModel.setNote(noteEditText.getText().toString());
                 viewModel.setAnswer(answerTextView.getText().toString());
                 getFragmentManager().beginTransaction()
                         .replace(R.id.quizContent, AnswerConfirmationFragment.newInstance())
