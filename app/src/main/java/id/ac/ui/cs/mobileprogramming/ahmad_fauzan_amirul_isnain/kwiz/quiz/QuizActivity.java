@@ -11,7 +11,6 @@ import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
-import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.util.NetworkChangeReceiver;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.R;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.TimerViewModel;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.UserViewModel;
@@ -20,7 +19,6 @@ public class QuizActivity extends AppCompatActivity {
 
     public static final Integer QUIZ_TIME = 10;
 
-    private NetworkChangeReceiver networkChangeReceiver;
     private TimerViewModel timerViewModel;
     private UserViewModel userViewModel;
 
