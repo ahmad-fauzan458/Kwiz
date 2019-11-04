@@ -3,7 +3,7 @@
     <data>
         <variable
             name="quizContentViewModel"
-            type="id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.quiz.QuizContentViewModel" />
+            type="id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.QuizContentViewModel" />
         <variable
             name="answerConfirmationInterface"
             type="id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.interfaces.AnswerConfirmationInterface" />

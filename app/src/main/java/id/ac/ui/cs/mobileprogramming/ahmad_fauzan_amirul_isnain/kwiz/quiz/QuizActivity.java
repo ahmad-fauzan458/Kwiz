@@ -8,14 +8,13 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.DialogInterface;
-import android.content.IntentFilter;
-import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
-import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.NetworkChangeReceiver;
+import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.util.NetworkChangeReceiver;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.R;
-import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.UserViewModel;
+import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.TimerViewModel;
+import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.UserViewModel;
 
 public class QuizActivity extends AppCompatActivity {
 

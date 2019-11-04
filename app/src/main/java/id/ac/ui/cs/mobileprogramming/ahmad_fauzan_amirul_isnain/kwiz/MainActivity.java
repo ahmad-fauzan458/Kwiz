@@ -3,10 +3,11 @@ package id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
-import android.content.BroadcastReceiver;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+
+import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.util.NetworkChangeReceiver;
 
 public class MainActivity extends AppCompatActivity {
 

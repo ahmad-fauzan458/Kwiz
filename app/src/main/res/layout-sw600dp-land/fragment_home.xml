@@ -3,7 +3,7 @@
     <data>
         <variable
             name="userViewModel"
-            type="id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.UserViewModel" />
+            type="id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.UserViewModel" />
         <variable
             name="homeInterface"
             type="id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.interfaces.HomeInterface" />

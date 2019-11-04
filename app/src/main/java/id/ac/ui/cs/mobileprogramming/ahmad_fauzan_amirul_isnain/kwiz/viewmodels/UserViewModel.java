@@ -1,4 +1,4 @@
-package id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz;
+package id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
