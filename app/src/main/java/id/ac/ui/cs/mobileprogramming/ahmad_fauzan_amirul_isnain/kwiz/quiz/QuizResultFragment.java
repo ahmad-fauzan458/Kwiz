@@ -23,11 +23,13 @@ import java.io.OutputStream;
 
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.R;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.ExternalStoragePermissions;
+import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.databinding.FragmentQuizResultBinding;
+import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.interfaces.QuizResultInterface;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class QuizResultFragment extends Fragment {
+public class QuizResultFragment extends Fragment implements QuizResultInterface {
 
     private String medalGold;
     private String medalSilver;
@@ -47,34 +49,21 @@ public class QuizResultFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_quiz_result, container, false);
+        FragmentQuizResultBinding binding =
+                FragmentQuizResultBinding.inflate(inflater, container, false);
+        binding.setQuizResultInterface(this);
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getView().findViewById(R.id.home_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().finish();
-            }
-        });
-
         ExternalStoragePermissions.verifyStoragePermissions(getActivity());
 
         medalGold = createImageOnData(R.drawable.medal_gold);
         medalSilver = createImageOnData(R.drawable.medal_silver);
         medalBronze = createImageOnData(R.drawable.medal_bronze);
-
-        getView().findViewById(R.id.share_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //TODO Complete medal selection logic
-                onShareMedal(medalGold);
-            }
-        });
     }
 
     /**
@@ -111,5 +100,15 @@ public class QuizResultFragment extends Fragment {
         shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         shareIntent.setType("image/*");
         startActivity(Intent.createChooser(shareIntent, getResources().getString(R.string.share)));
+    }
+
+    @Override
+    public void home(){
+        getActivity().finish();
+    }
+
+    @Override
+    public void share(){
+        onShareMedal(medalGold);
     }
 }
