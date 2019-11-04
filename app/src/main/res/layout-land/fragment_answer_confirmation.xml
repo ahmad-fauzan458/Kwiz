@@ -2,11 +2,14 @@
 <layout>
     <data>
         <variable
-            name="quizContentViewModel"
-            type="id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.QuizContentViewModel" />
+            name="noteViewModel"
+            type="id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.NoteViewModel" />
         <variable
             name="answerConfirmationInterface"
             type="id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.interfaces.AnswerConfirmationInterface" />
+        <variable
+            name="optionsViewModel"
+            type="id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.OptionsViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -18,7 +21,7 @@
 
         <TextView
             android:id="@+id/yourNoteText"
-            android:text="@={quizContentViewModel.getNote()}"
+            android:text="@={noteViewModel.getNote()}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
@@ -81,7 +84,7 @@
 
         <TextView
             android:id="@+id/yourAnswerText"
-            android:text="@={quizContentViewModel.getAnswer()}"
+            android:text="@={optionsViewModel.getOptionChecked()}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"

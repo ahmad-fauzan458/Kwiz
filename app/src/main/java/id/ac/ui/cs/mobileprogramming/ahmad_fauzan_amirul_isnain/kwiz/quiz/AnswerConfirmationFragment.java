@@ -12,10 +12,12 @@ import android.view.ViewGroup;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.R;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.databinding.FragmentAnswerConfirmationBinding;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.interfaces.AnswerConfirmationInterface;
-import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.QuizContentViewModel;
+import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.NoteViewModel;
+import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.OptionsViewModel;
 
 public class AnswerConfirmationFragment extends Fragment implements AnswerConfirmationInterface {
-    private QuizContentViewModel viewModel;
+    private NoteViewModel noteViewModel;
+    private OptionsViewModel optionsViewModel;
 
     public static AnswerConfirmationFragment newInstance() {
         return new AnswerConfirmationFragment();
@@ -26,8 +28,10 @@ public class AnswerConfirmationFragment extends Fragment implements AnswerConfir
                              Bundle savedInstanceState) {
         FragmentAnswerConfirmationBinding binding =
                 FragmentAnswerConfirmationBinding.inflate(inflater, container, false);
-        viewModel = ViewModelProviders.of(getActivity()).get(QuizContentViewModel.class);
-        binding.setQuizContentViewModel(viewModel);
+        noteViewModel = ViewModelProviders.of(getActivity()).get(NoteViewModel.class);
+        binding.setNoteViewModel(noteViewModel);
+        optionsViewModel = ViewModelProviders.of(getActivity()).get(OptionsViewModel.class);
+        binding.setOptionsViewModel(optionsViewModel);
         binding.setAnswerConfirmationInterface(this);
         return binding.getRoot();
     }

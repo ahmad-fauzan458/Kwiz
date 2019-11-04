@@ -2,8 +2,11 @@
     <layout>
     <data>
         <variable
-            name="quizContentViewModel"
-            type="id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.QuizContentViewModel" />
+            name="noteViewModel"
+            type="id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.NoteViewModel" />
+        <variable
+            name="optionsViewModel"
+            type="id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.OptionsViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -15,6 +18,7 @@
 
         <Button
             android:id="@+id/submit"
+            android:onClick="@{() -> quizContentInterface.submit()}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -36,7 +40,7 @@
 
         <EditText
             android:id="@+id/noteEditText"
-            android:text="@={quizContentViewModel.note}"
+            android:text="@={noteViewModel.note}"
             android:layout_width="257dp"
             android:layout_height="76dp"
             android:layout_marginStart="40dp"
@@ -128,6 +132,8 @@
 
                     <RadioButton
                         android:id="@+id/radio_a"
+                        android:checked="@{optionsViewModel.optionChecked.equals(OptionsViewModel.OPTION_A)}"
+                        android:onClick="@{()->optionsViewModel.setOptionChecked(OptionsViewModel.OPTION_A)}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -137,6 +143,8 @@
 
                     <RadioButton
                         android:id="@+id/radio_c"
+                        android:checked="@{optionsViewModel.optionChecked.equals(OptionsViewModel.OPTION_C)}"
+                        android:onClick="@{()->optionsViewModel.setOptionChecked(OptionsViewModel.OPTION_C)}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -161,6 +169,8 @@
 
                     <RadioButton
                         android:id="@+id/radio_b"
+                        android:checked="@{optionsViewModel.optionChecked.equals(OptionsViewModel.OPTION_B)}"
+                        android:onClick="@{()->optionsViewModel.setOptionChecked(OptionsViewModel.OPTION_B)}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -170,6 +180,8 @@
 
                     <RadioButton
                         android:id="@+id/radio_d"
+                        android:checked="@{optionsViewModel.optionChecked.equals(OptionsViewModel.OPTION_D)}"
+                        android:onClick="@{()->optionsViewModel.setOptionChecked(OptionsViewModel.OPTION_D)}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"

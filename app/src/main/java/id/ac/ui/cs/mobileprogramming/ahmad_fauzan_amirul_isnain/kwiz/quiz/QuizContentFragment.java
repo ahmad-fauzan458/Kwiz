@@ -14,17 +14,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
-import android.widget.TextView;
 
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.R;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.databinding.FragmentQuizContentBinding;
-import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.QuizContentViewModel;
+import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.interfaces.QuizContentInterface;
+import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.NoteViewModel;
+import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.OptionsViewModel;
 
-public class QuizContentFragment extends Fragment {
+public class QuizContentFragment extends Fragment implements QuizContentInterface {
 
-    private TextView answerTextView;
     private RadioButton previousButton;
-    private QuizContentViewModel viewModel;
+    private NoteViewModel noteViewModel;
+    private OptionsViewModel optionsViewModel;
 
     public static QuizContentFragment newInstance() {
         return new QuizContentFragment();
@@ -33,86 +34,27 @@ public class QuizContentFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         FragmentQuizContentBinding binding =
                 FragmentQuizContentBinding.inflate(inflater, container, false);
-        viewModel = ViewModelProviders.of(getActivity()).get(QuizContentViewModel.class);
-        binding.setQuizContentViewModel(viewModel);
+        noteViewModel = ViewModelProviders.of(getActivity()).get(NoteViewModel.class);
+        binding.setNoteViewModel(noteViewModel);
+        optionsViewModel = ViewModelProviders.of(getActivity()).get(OptionsViewModel.class);
+        binding.setOptionsViewModel(optionsViewModel);
+        binding.setLifecycleOwner(this);
+        binding.setQuizContentInterface(this);
         return binding.getRoot();
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        View.OnClickListener radioButtonClickListener = (new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                boolean checked = ((RadioButton) view).isChecked();
-
-                if (previousButton != null && previousButton.getId() == view.getId()){
-                    answerTextView = null;
-                    previousButton.setChecked(false);
-                    previousButton = null;
-                    return;
-                }
-
-                changePreviousButton(view);
-
-                switch(view.getId()) {
-                    case R.id.radio_a:
-                        if (checked) {
-                            answerTextView = getView().findViewById(R.id.option_a_text);
-                        }
-                        break;
-
-                    case R.id.radio_b:
-                        if (checked) {
-                            answerTextView = getView().findViewById(R.id.option_b_text);
-                        }
-                        break;
-
-                    case R.id.radio_c:
-                        if (checked) {
-                            answerTextView = getView().findViewById(R.id.option_c_text);
-                        }
-                        break;
-
-                    case R.id.radio_d:
-                        if (checked) {
-                            answerTextView = getView().findViewById(R.id.option_d_text);
-                        }
-                        break;
-                }
-            }
-
-            private void changePreviousButton(View view){
-                if (previousButton != null){
-                    previousButton.setChecked(false);
-                }
-                previousButton = (RadioButton) view;
-            }
-        });
-
-        getView().findViewById(R.id.radio_a).setOnClickListener(radioButtonClickListener);
-        getView().findViewById(R.id.radio_b).setOnClickListener(radioButtonClickListener);
-        getView().findViewById(R.id.radio_c).setOnClickListener(radioButtonClickListener);
-        getView().findViewById(R.id.radio_d).setOnClickListener(radioButtonClickListener);
-
-        getView().findViewById(R.id.submit).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (answerTextView == null) {
-                    showErrorAnswerNotChosen();
-                    return;
-                }
-                viewModel.setAnswer(answerTextView.getText().toString());
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.quizContent, AnswerConfirmationFragment.newInstance())
-                        .addToBackStack(null)
-                        .commit();
-            }
-        });
+    public void submit() {
+        if (optionsViewModel.getOptionChecked().getValue() == null){
+            showErrorAnswerNotChosen();
+            return;
+        }
+        getFragmentManager().beginTransaction()
+                .replace(R.id.quizContent, AnswerConfirmationFragment.newInstance())
+                .addToBackStack(null)
+                .commit();
     }
 
     private void showErrorAnswerNotChosen(){
@@ -128,13 +70,5 @@ public class QuizContentFragment extends Fragment {
                 });
 
         alertDialog.show();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (previousButton != null) {
-            previousButton = getView().findViewById(previousButton.getId());
-        }
     }
 }
