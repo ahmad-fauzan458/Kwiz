@@ -1,6 +1,5 @@
 package id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz;
 
-
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.databinding.FragmentLeaderboardBinding;
 
 
 /**
@@ -26,6 +27,8 @@ public class LeaderboardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_leaderboard, container, false);
+        FragmentLeaderboardBinding binding =
+                FragmentLeaderboardBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 }
