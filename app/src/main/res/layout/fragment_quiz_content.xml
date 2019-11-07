@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <layout>
+    <layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
     <data>
         <import type="id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.OptionsViewModel"/>
         <variable
@@ -11,10 +13,11 @@
         <variable
             name="quizContentInterface"
             type="id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.interfaces.QuizContentInterface" />
+        <variable
+            name="questionViewModel"
+            type="id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.QuestionViewModel" />
     </data>
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/fragmentQuizContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -32,66 +35,73 @@
             app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
-            android:id="@+id/yourAnswerPointer"
+            android:id="@+id/question"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Lorem Ipsum Dolor Sit Amet"
+            android:paddingStart="40dp"
+            android:paddingEnd="40dp"
+            android:text="@{questionViewModel.currentQuestion}"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.528"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/option_a_text"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="116dp"
-            android:layout_marginTop="56dp"
-            android:text="@string/option_a"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="40dp"
+            android:orientation="vertical"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/yourAnswerPointer" />
+            app:layout_constraintTop_toBottomOf="@+id/question">
 
-        <TextView
-            android:id="@+id/option_d_text"
+            <TextView
+                android:id="@+id/option_a_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{String.format(@string/question_option_a, questionViewModel.currentQuestionOptionA)}" />
+
+            <TextView
+                android:id="@+id/option_b_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="@{String.format(@string/question_option_b, questionViewModel.currentQuestionOptionB)}" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="116dp"
-            android:text="@string/option_d"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="40dp"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/option_c_text" />
+            app:layout_constraintTop_toBottomOf="@+id/question">
 
-        <TextView
-            android:id="@+id/option_b_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="116dp"
-            android:layout_marginTop="32dp"
-            android:text="@string/option_b"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/option_a_text" />
+            <TextView
+                android:id="@+id/option_c_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{String.format(@string/question_option_c, questionViewModel.currentQuestionOptionC)}" />
 
-        <TextView
-            android:id="@+id/option_c_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="56dp"
-            android:layout_marginEnd="116dp"
-            android:text="@string/option_c"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/yourAnswerPointer" />
+            <TextView
+                android:id="@+id/option_d_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="@{String.format(@string/question_option_d, questionViewModel.currentQuestionOptionD)}" />
+        </LinearLayout>
 
         <EditText
             android:id="@+id/noteEditText"
-            android:text="@={noteViewModel.note}"
             android:layout_width="257dp"
             android:layout_height="76dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="15dp"
             android:ems="10"
             android:hint="@string/additional_note"
             android:inputType="textPersonName"
+            android:text="@={noteViewModel.note}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
@@ -104,7 +114,7 @@
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/yourAnswerPointer">
+            app:layout_constraintTop_toBottomOf="@+id/question">
 
             <LinearLayout
                 android:layout_width="match_parent"
