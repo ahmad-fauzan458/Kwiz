@@ -21,11 +21,11 @@
 
         <Button
             android:id="@+id/back"
-            android:onClick="@{() -> answerConfirmationInterface.back()}"
+            android:onClick="@{() -> answerConfirmationInterface.cancel()}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="@string/back"
+            android:text="@string/cancel"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,11 +34,11 @@
 
         <Button
             android:id="@+id/next"
-            android:onClick="@{() -> answerConfirmationInterface.next()}"
+            android:onClick="@{() -> answerConfirmationInterface.confirm()}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="56dp"
-            android:text="@string/next"
+            android:text="@string/confirm"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -43,4 +43,6 @@
     If there isn\'t any back button, it means you can\'t go back at current situation.
     </string>
     <string name="anonymous">Anonymous</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
 </resources>

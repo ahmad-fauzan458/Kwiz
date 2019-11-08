@@ -47,13 +47,13 @@ public class AnswerConfirmationFragment extends Fragment implements AnswerConfir
     }
 
     @Override
-    public void back(){
+    public void cancel(){
         QuizActivity quizActivity = (QuizActivity)getActivity();
         quizActivity.back();
     }
 
     @Override
-    public void next(){
+    public void confirm(){
         if (questionViewModel.getCurrentAnswer().
                 equals(optionsViewModel.getOptionChecked().getValue())){
             userViewModel.addScore(QuizActivity.CORRECT_SCORE + timerViewModel.getTime().getValue());

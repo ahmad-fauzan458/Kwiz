@@ -2,7 +2,7 @@ package id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.interfaces
 
 public interface AnswerConfirmationInterface {
 
-    void back();
+    void cancel();
 
-    void next();
+    void confirm();
 }
