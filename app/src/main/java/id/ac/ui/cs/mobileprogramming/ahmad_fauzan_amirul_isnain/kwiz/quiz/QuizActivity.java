@@ -10,14 +10,8 @@ import androidx.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
-
-import java.util.List;
 
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.R;
-import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.models.Question;
-import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.QuestionViewModel;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.TimerViewModel;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.UserViewModel;
 
@@ -35,7 +29,8 @@ public class QuizActivity extends AppCompatActivity {
         DataBindingUtil.setContentView(this, R.layout.activity_quiz);
 
         userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
-        userViewModel.setName(getIntent().getStringExtra("username"));
+        String username = getIntent().getStringExtra("username");
+        userViewModel.setName(username == null ? "" : username);
 
         timerViewModel = ViewModelProviders.of(this).get(TimerViewModel.class);
         final Observer<Boolean> timerFinishedObserver = new Observer<Boolean>() {

@@ -42,4 +42,5 @@
     Please use back button on the app display.
     If there isn\'t any back button, it means you can\'t go back at current situation.
     </string>
+    <string name="anonymous">Anonymous</string>
 </resources>

@@ -42,4 +42,5 @@
     Silakan gunakan tombol kembali pada layar aplikasi.
     Jika tidak ada, hal tersebut berarti kamu tidak bisa kembali pada saat ini.
     </string>
+    <string name="anonymous">Anonim</string>
 </resources>

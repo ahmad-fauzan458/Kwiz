@@ -4,8 +4,12 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import java.util.List;
+
+import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.R;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.models.User;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.repositories.MedalRepository;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.repositories.UserRepository;
@@ -15,7 +19,6 @@ public class UserViewModel extends AndroidViewModel {
     private MutableLiveData<Integer> score;
     private UserRepository userRepository;
     private MedalRepository medalRepository;
-
 
     public UserViewModel(@NonNull Application application) {
         super(application);
@@ -59,7 +62,14 @@ public class UserViewModel extends AndroidViewModel {
     }
 
     public void saveData() {
-        userRepository.insert(new User(this.name.getValue(), this.score.getValue(),
+        String name = this.name.getValue().equals("") ?
+                getApplication().getResources().getString(R.string.anonymous) : this.name.getValue();
+        userRepository.insert(new User(name, this.score.getValue(),
                 medalRepository.getFirstMedalLessThanScore(this.score.getValue()).getId()));
     }
+
+    public List<User> getAllUsers() {
+        return userRepository.getAllUsers();
+    }
+
 }

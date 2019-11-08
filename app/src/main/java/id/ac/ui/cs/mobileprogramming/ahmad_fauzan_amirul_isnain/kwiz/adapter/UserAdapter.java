@@ -1,0 +1,53 @@
+package id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.adapter;
+
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.List;
+
+import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.databinding.LeaderboardItemBinding;
+import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.models.User;
+
+public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder>{
+    private List<User> userList;
+
+    public UserAdapter(List<User> userList) {
+        this.userList = userList;
+    }
+
+    @Override
+    public int getItemCount() {
+        return userList != null ? userList.size() : 0;
+    }
+
+    @NonNull
+    @Override
+    public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        LeaderboardItemBinding itemBinding = LeaderboardItemBinding.inflate(layoutInflater, parent, false);
+        return new UserViewHolder(itemBinding);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
+        User user = userList.get(position);
+        holder.bind(user);
+    }
+
+    class UserViewHolder extends RecyclerView.ViewHolder {
+        private LeaderboardItemBinding binding;
+
+        public UserViewHolder(LeaderboardItemBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
+
+        public void bind(User user) {
+            binding.setUser(user);
+            binding.executePendingBindings();
+        }
+    }
+}

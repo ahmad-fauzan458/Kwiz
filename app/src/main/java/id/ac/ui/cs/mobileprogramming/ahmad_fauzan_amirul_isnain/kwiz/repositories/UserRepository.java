@@ -3,6 +3,8 @@ package id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.repositori
 import android.app.Application;
 import android.os.AsyncTask;
 
+import java.util.List;
+
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.dao.UserDao;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.database.KwizDatabase;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.models.User;
@@ -25,6 +27,10 @@ public class UserRepository {
 
     public void delete(User user) {
         new DeleteUserAsyncTask(userDao).execute(user);
+    }
+
+    public List<User> getAllUsers(){
+        return userDao.getAllUsers();
     }
 
     private static class InsertUserAsyncTask extends AsyncTask<User, Void, Void> {
