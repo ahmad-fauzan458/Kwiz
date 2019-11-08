@@ -60,7 +60,6 @@ public class AnswerConfirmationFragment extends Fragment implements AnswerConfir
         }
 
         if (questionViewModel.isQuestionRunsOut()){
-            userViewModel.saveData();
             getFragmentManager().beginTransaction()
                     .replace(R.id.quizContent, QuizResultFragment.newInstance())
                     .addToBackStack(null)

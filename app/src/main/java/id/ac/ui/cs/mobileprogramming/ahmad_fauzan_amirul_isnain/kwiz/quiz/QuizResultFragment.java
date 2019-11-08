@@ -44,6 +44,9 @@ public class QuizResultFragment extends Fragment implements QuizResultInterface 
         super.onCreate(savedInstanceState);
         QuizActivity quizActivity = (QuizActivity) getActivity();
         quizActivity.stopTimer();
+        if (savedInstanceState == null) {
+            userViewModel.saveData();
+        }
     }
 
     @Override
