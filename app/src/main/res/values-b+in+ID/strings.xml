@@ -46,4 +46,6 @@
     <string name="confirm">Konfirmasi</string>
     <string name="cancel">Batal</string>
     <string name="allow_storage_permission">Tolong izinkan storage permission terlebih dahulu</string>
+    <string name="write_note_permission">Storage Permission Tidak Diberikan</string>
+    <string name="write_note_permission_content">Tolong izinkan storage permission atau kosongkan catatan</string>
 </resources>

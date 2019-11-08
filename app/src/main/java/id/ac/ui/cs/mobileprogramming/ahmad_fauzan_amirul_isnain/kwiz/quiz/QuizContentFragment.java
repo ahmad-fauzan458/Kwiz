@@ -15,14 +15,13 @@ import android.widget.RadioButton;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.R;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.databinding.FragmentQuizContentBinding;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.interfaces.QuizContentInterface;
-import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.models.Question;
+import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.util.ExternalStoragePermissions;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.NoteViewModel;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.OptionsViewModel;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.QuestionViewModel;
 
 public class QuizContentFragment extends Fragment implements QuizContentInterface {
 
-    private RadioButton previousButton;
     private NoteViewModel noteViewModel;
     private OptionsViewModel optionsViewModel;
     private QuestionViewModel questionViewModel;
@@ -53,6 +52,15 @@ public class QuizContentFragment extends Fragment implements QuizContentInterfac
             showErrorAnswerNotChosen();
             return;
         }
+
+        if (noteViewModel.getNote().getValue() != null
+                && !noteViewModel.getNote().getValue().equals("")
+                && !ExternalStoragePermissions.isPermissionStorageGranted(getActivity())){
+            showErrorNoPermissionToSaveNote();
+            ExternalStoragePermissions.requestStoragePermission(getActivity());
+            return;
+        }
+
         getFragmentManager().beginTransaction()
                 .replace(R.id.quizContent, AnswerConfirmationFragment.newInstance())
                 .addToBackStack(null)
@@ -71,6 +79,20 @@ public class QuizContentFragment extends Fragment implements QuizContentInterfac
                     }
                 });
 
+        alertDialog.show();
+    }
+
+    public void showErrorNoPermissionToSaveNote(){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+        alertDialog.setTitle(getResources().getString(R.string.write_note_permission));
+        alertDialog.setMessage(getResources().getString(R.string.write_note_permission_content));
+
+        alertDialog.setNegativeButton(getResources().getString(R.string.back_to_quiz),
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
         alertDialog.show();
     }
 }
