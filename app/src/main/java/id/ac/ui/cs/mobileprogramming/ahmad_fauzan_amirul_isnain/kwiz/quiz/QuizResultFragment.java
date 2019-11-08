@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Environment;
 import android.view.LayoutInflater;
@@ -21,15 +22,18 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.R;
+import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.repositories.UserRepository;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.util.ExternalStoragePermissions;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.databinding.FragmentQuizResultBinding;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.interfaces.QuizResultInterface;
+import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.UserViewModel;
 
 public class QuizResultFragment extends Fragment implements QuizResultInterface {
 
     private String medalGold;
     private String medalSilver;
     private String medalBronze;
+    private UserViewModel userViewModel;
 
     public static QuizResultFragment newInstance() {
         return new QuizResultFragment();
@@ -48,6 +52,8 @@ public class QuizResultFragment extends Fragment implements QuizResultInterface 
         FragmentQuizResultBinding binding =
                 FragmentQuizResultBinding.inflate(inflater, container, false);
         binding.setQuizResultInterface(this);
+        userViewModel = ViewModelProviders.of(getActivity()).get(UserViewModel.class);
+        binding.setUserViewModel(userViewModel);
         return binding.getRoot();
     }
 

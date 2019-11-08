@@ -15,14 +15,17 @@ import android.widget.RadioButton;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.R;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.databinding.FragmentQuizContentBinding;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.interfaces.QuizContentInterface;
+import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.models.Question;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.NoteViewModel;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.OptionsViewModel;
+import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.QuestionViewModel;
 
 public class QuizContentFragment extends Fragment implements QuizContentInterface {
 
     private RadioButton previousButton;
     private NoteViewModel noteViewModel;
     private OptionsViewModel optionsViewModel;
+    private QuestionViewModel questionViewModel;
 
     public static QuizContentFragment newInstance() {
         return new QuizContentFragment();
@@ -37,6 +40,8 @@ public class QuizContentFragment extends Fragment implements QuizContentInterfac
         binding.setNoteViewModel(noteViewModel);
         optionsViewModel = ViewModelProviders.of(getActivity()).get(OptionsViewModel.class);
         binding.setOptionsViewModel(optionsViewModel);
+        questionViewModel = ViewModelProviders.of(getActivity()).get(QuestionViewModel.class);
+        binding.setQuestionViewModel(questionViewModel);
         binding.setLifecycleOwner(this);
         binding.setQuizContentInterface(this);
         return binding.getRoot();

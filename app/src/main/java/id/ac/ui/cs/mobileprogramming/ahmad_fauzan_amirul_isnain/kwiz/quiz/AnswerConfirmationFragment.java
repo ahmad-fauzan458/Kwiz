@@ -14,10 +14,16 @@ import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.databinding
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.interfaces.AnswerConfirmationInterface;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.NoteViewModel;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.OptionsViewModel;
+import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.QuestionViewModel;
+import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.TimerViewModel;
+import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.UserViewModel;
 
 public class AnswerConfirmationFragment extends Fragment implements AnswerConfirmationInterface {
     private NoteViewModel noteViewModel;
     private OptionsViewModel optionsViewModel;
+    private QuestionViewModel questionViewModel;
+    private UserViewModel userViewModel;
+    private TimerViewModel timerViewModel;
 
     public static AnswerConfirmationFragment newInstance() {
         return new AnswerConfirmationFragment();
@@ -32,6 +38,10 @@ public class AnswerConfirmationFragment extends Fragment implements AnswerConfir
         binding.setNoteViewModel(noteViewModel);
         optionsViewModel = ViewModelProviders.of(getActivity()).get(OptionsViewModel.class);
         binding.setOptionsViewModel(optionsViewModel);
+        questionViewModel = ViewModelProviders.of(getActivity()).get(QuestionViewModel.class);
+        userViewModel = ViewModelProviders.of(getActivity()).get(UserViewModel.class);
+        timerViewModel = ViewModelProviders.of(getActivity()).get(TimerViewModel.class);
+
         binding.setAnswerConfirmationInterface(this);
         return binding.getRoot();
     }
@@ -44,8 +54,25 @@ public class AnswerConfirmationFragment extends Fragment implements AnswerConfir
 
     @Override
     public void next(){
+        if (questionViewModel.getCurrentAnswer().
+                equals(optionsViewModel.getOptionChecked().getValue())){
+            userViewModel.addScore(QuizActivity.CORRECT_SCORE + timerViewModel.getTime().getValue());
+        }
+
+        if (questionViewModel.isQuestionRunsOut()){
+            userViewModel.saveData();
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.quizContent, QuizResultFragment.newInstance())
+                    .addToBackStack(null)
+                    .commit();
+            return;
+        }
+
+        questionViewModel.nextQuestion();
+        optionsViewModel.setOptionChecked(null);
+
         getFragmentManager().beginTransaction()
-                .replace(R.id.quizContent, QuizResultFragment.newInstance())
+                .replace(R.id.quizContent, QuizContentFragment.newInstance())
                 .addToBackStack(null)
                 .commit();
     }
