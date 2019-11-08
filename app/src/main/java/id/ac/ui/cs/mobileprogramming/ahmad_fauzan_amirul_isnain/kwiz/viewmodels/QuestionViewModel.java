@@ -1,7 +1,6 @@
 package id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -13,11 +12,16 @@ import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.models.Ques
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.repositories.QuestionRepository;
 
 public class QuestionViewModel extends AndroidViewModel {
-    private MutableLiveData<String> currentQuestion;
-    private MutableLiveData<String> currentQuestionOptionA;
-    private MutableLiveData<String> currentQuestionOptionB;
-    private MutableLiveData<String> currentQuestionOptionC;
-    private MutableLiveData<String> currentQuestionOptionD;
+    private MutableLiveData<String> currentEnQuestion;
+    private MutableLiveData<String> currentEnQuestionOptionA;
+    private MutableLiveData<String> currentEnQuestionOptionB;
+    private MutableLiveData<String> currentEnQuestionOptionC;
+    private MutableLiveData<String> currentEnQuestionOptionD;
+    private MutableLiveData<String> currentIdQuestion;
+    private MutableLiveData<String> currentIdQuestionOptionA;
+    private MutableLiveData<String> currentIdQuestionOptionB;
+    private MutableLiveData<String> currentIdQuestionOptionC;
+    private MutableLiveData<String> currentIdQuestionOptionD;
     private String currentAnswer;
     private ListIterator<Question> questionsIterator;
     private Boolean questionRunsOut;
@@ -30,39 +34,74 @@ public class QuestionViewModel extends AndroidViewModel {
         nextQuestion();
     }
 
-    private void setCurrentQuestion(String currentQuestion) {
-        if (this.currentQuestion == null) {
-            this.currentQuestion = new MutableLiveData<>();
+    private void setCurrentEnQuestion(String currentEnQuestion) {
+        if (this.currentEnQuestion == null) {
+            this.currentEnQuestion = new MutableLiveData<>();
         }
-        this.currentQuestion.setValue(currentQuestion);
+        this.currentEnQuestion.setValue(currentEnQuestion);
     }
 
-    private void setCurrentQuestionOptionA(String optionA) {
-        if (this.currentQuestionOptionA == null) {
-            this.currentQuestionOptionA = new MutableLiveData<>();
+    private void setCurrentEnQuestionOptionA(String optionA) {
+        if (this.currentEnQuestionOptionA == null) {
+            this.currentEnQuestionOptionA = new MutableLiveData<>();
         }
-        this.currentQuestionOptionA.setValue(optionA);
+        this.currentEnQuestionOptionA.setValue(optionA);
     }
 
-    private void setCurrentQuestionOptionB(String optionB) {
-        if (this.currentQuestionOptionB == null) {
-            this.currentQuestionOptionB = new MutableLiveData<>();
+    private void setCurrentEnQuestionOptionB(String optionB) {
+        if (this.currentEnQuestionOptionB == null) {
+            this.currentEnQuestionOptionB = new MutableLiveData<>();
         }
-        this.currentQuestionOptionB.setValue(optionB);
+        this.currentEnQuestionOptionB.setValue(optionB);
     }
 
-    private void setCurrentQuestionOptionC(String optionC) {
-        if (this.currentQuestionOptionC == null) {
-            this.currentQuestionOptionC = new MutableLiveData<>();
+    private void setCurrentEnQuestionOptionC(String optionC) {
+        if (this.currentEnQuestionOptionC == null) {
+            this.currentEnQuestionOptionC = new MutableLiveData<>();
         }
-        this.currentQuestionOptionC.setValue(optionC);
+        this.currentEnQuestionOptionC.setValue(optionC);
     }
 
-    private void setCurrentQuestionOptionD(String optionD) {
-        if (this.currentQuestionOptionD == null) {
-            this.currentQuestionOptionD = new MutableLiveData<>();
+    private void setCurrentEnQuestionOptionD(String optionD) {
+        if (this.currentEnQuestionOptionD == null) {
+            this.currentEnQuestionOptionD = new MutableLiveData<>();
         }
-        this.currentQuestionOptionD.setValue(optionD);
+        this.currentEnQuestionOptionD.setValue(optionD);
+    }
+
+    private void setCurrentIdQuestion(String currentIdQuestion) {
+        if (this.currentIdQuestion == null) {
+            this.currentIdQuestion = new MutableLiveData<>();
+        }
+        this.currentIdQuestion.setValue(currentIdQuestion);
+    }
+
+    private void setCurrentIdQuestionOptionA(String optionA) {
+        if (this.currentIdQuestionOptionA == null) {
+            this.currentIdQuestionOptionA = new MutableLiveData<>();
+        }
+        this.currentIdQuestionOptionA.setValue(optionA);
+    }
+
+    private void setCurrentIdQuestionOptionB(String optionB) {
+        if (this.currentIdQuestionOptionB == null) {
+            this.currentIdQuestionOptionB = new MutableLiveData<>();
+        }
+        this.currentIdQuestionOptionB.setValue(optionB);
+    }
+
+    private void setCurrentIdQuestionOptionC(String optionC) {
+        if (this.currentIdQuestionOptionC == null) {
+            this.currentIdQuestionOptionC = new MutableLiveData<>();
+        }
+        this.currentIdQuestionOptionC.setValue(optionC);
+    }
+
+    private void setCurrentIdQuestionOptionD(String optionD) {
+        if (this.currentIdQuestionOptionD == null) {
+            this.currentIdQuestionOptionD = new MutableLiveData<>();
+        }
+        this.currentIdQuestionOptionD.setValue(optionD);
     }
 
     private void setCurrentAnswer(String currentAnswer) {
@@ -73,39 +112,74 @@ public class QuestionViewModel extends AndroidViewModel {
         this.questionRunsOut = questionRunsOut;
     }
 
-    public MutableLiveData<String> getCurrentQuestion() {
-        if (currentQuestion == null) {
-            currentQuestion = new MutableLiveData<>();
+    public MutableLiveData<String> getCurrentEnQuestion() {
+        if (currentEnQuestion == null) {
+            currentEnQuestion = new MutableLiveData<>();
         }
-        return currentQuestion;
+        return currentEnQuestion;
     }
 
-    public MutableLiveData<String> getCurrentQuestionOptionA() {
-        if (currentQuestionOptionA == null) {
-            currentQuestionOptionA = new MutableLiveData<>();
+    public MutableLiveData<String> getCurrentEnQuestionOptionA() {
+        if (currentEnQuestionOptionA == null) {
+            currentEnQuestionOptionA = new MutableLiveData<>();
         }
-        return currentQuestionOptionA;
+        return currentEnQuestionOptionA;
     }
 
-    public MutableLiveData<String> getCurrentQuestionOptionB() {
-        if (currentQuestionOptionB == null) {
-            currentQuestionOptionB = new MutableLiveData<>();
+    public MutableLiveData<String> getCurrentEnQuestionOptionB() {
+        if (currentEnQuestionOptionB == null) {
+            currentEnQuestionOptionB = new MutableLiveData<>();
         }
-        return currentQuestionOptionB;
+        return currentEnQuestionOptionB;
     }
 
-    public MutableLiveData<String> getCurrentQuestionOptionC() {
-        if (currentQuestionOptionC == null) {
-            currentQuestionOptionC = new MutableLiveData<>();
+    public MutableLiveData<String> getCurrentEnQuestionOptionC() {
+        if (currentEnQuestionOptionC == null) {
+            currentEnQuestionOptionC = new MutableLiveData<>();
         }
-        return currentQuestionOptionC;
+        return currentEnQuestionOptionC;
     }
 
-    public MutableLiveData<String> getCurrentQuestionOptionD() {
-        if (currentQuestionOptionD == null) {
-            currentQuestionOptionD = new MutableLiveData<>();
+    public MutableLiveData<String> getCurrentEnQuestionOptionD() {
+        if (currentEnQuestionOptionD == null) {
+            currentEnQuestionOptionD = new MutableLiveData<>();
         }
-        return currentQuestionOptionD;
+        return currentEnQuestionOptionD;
+    }
+
+    public MutableLiveData<String> getCurrentIdQuestion() {
+        if (currentIdQuestion == null) {
+            currentIdQuestion = new MutableLiveData<>();
+        }
+        return currentIdQuestion;
+    }
+
+    public MutableLiveData<String> getCurrentIdQuestionOptionA() {
+        if (currentIdQuestionOptionA == null) {
+            currentIdQuestionOptionA = new MutableLiveData<>();
+        }
+        return currentIdQuestionOptionA;
+    }
+
+    public MutableLiveData<String> getCurrentIdQuestionOptionB() {
+        if (currentIdQuestionOptionB == null) {
+            currentIdQuestionOptionB = new MutableLiveData<>();
+        }
+        return currentIdQuestionOptionB;
+    }
+
+    public MutableLiveData<String> getCurrentIdQuestionOptionC() {
+        if (currentIdQuestionOptionC == null) {
+            currentIdQuestionOptionC = new MutableLiveData<>();
+        }
+        return currentIdQuestionOptionC;
+    }
+
+    public MutableLiveData<String> getCurrentIdQuestionOptionD() {
+        if (currentIdQuestionOptionD == null) {
+            currentIdQuestionOptionD = new MutableLiveData<>();
+        }
+        return currentIdQuestionOptionD;
     }
 
     public String getCurrentAnswer() {
@@ -115,11 +189,16 @@ public class QuestionViewModel extends AndroidViewModel {
     public void nextQuestion() {
         if (questionsIterator.hasNext()) {
             Question question = questionsIterator.next();
-            setCurrentQuestion(question.getContent());
-            setCurrentQuestionOptionA(question.getOptionA());
-            setCurrentQuestionOptionB(question.getOptionB());
-            setCurrentQuestionOptionC(question.getOptionC());
-            setCurrentQuestionOptionD(question.getOptionD());
+            setCurrentEnQuestion(question.getEnContent());
+            setCurrentEnQuestionOptionA(question.getEnOptionA());
+            setCurrentEnQuestionOptionB(question.getEnOptionB());
+            setCurrentEnQuestionOptionC(question.getEnOptionC());
+            setCurrentEnQuestionOptionD(question.getEnOptionD());
+            setCurrentIdQuestion(question.getIdContent());
+            setCurrentIdQuestionOptionA(question.getIdOptionA());
+            setCurrentIdQuestionOptionB(question.getIdOptionB());
+            setCurrentIdQuestionOptionC(question.getIdOptionC());
+            setCurrentIdQuestionOptionD(question.getIdOptionD());
             setCurrentAnswer(question.getAnswer());
             if (!questionsIterator.hasNext()){
                 setQuestionRunsOut(true);

@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">Kwiz</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="ready_to_take_quiz">Ready to take quiz?</string>
     <string name="fill_thix_box_with_your_name">Fill thix box with your name ...</string>
     <string name="start">Start</string>

@@ -16,6 +16,9 @@
         <variable
             name="questionViewModel"
             type="id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.QuestionViewModel" />
+        <variable
+            name="localeCheck"
+            type="id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.util.LocaleCheck" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/fragmentQuizContent"
@@ -41,7 +44,7 @@
             android:layout_marginTop="4dp"
             android:paddingStart="40dp"
             android:paddingEnd="40dp"
-            android:text="@{questionViewModel.currentQuestion}"
+            android:text="@{localeCheck.isLocaleIndonesia() ? questionViewModel.currentIdQuestion : questionViewModel.currentEnQuestion}"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -51,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="30dp"
             android:orientation="vertical"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/question">
@@ -60,20 +63,20 @@
                 android:id="@+id/option_a_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{String.format(@string/question_option_a, questionViewModel.currentQuestionOptionA)}" />
+                android:text="@{localeCheck.isLocaleIndonesia() ? String.format(@string/question_option_a, questionViewModel.currentIdQuestionOptionA) : String.format(@string/question_option_a, questionViewModel.currentEnQuestionOptionA)}" />
 
             <TextView
                 android:id="@+id/option_b_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="@{String.format(@string/question_option_b, questionViewModel.currentQuestionOptionB)}" />
+                android:text="@{localeCheck.isLocaleIndonesia() ? String.format(@string/question_option_b, questionViewModel.currentIdQuestionOptionB) : String.format(@string/question_option_b, questionViewModel.currentEnQuestionOptionB)}" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="30dp"
             android:layout_marginEnd="40dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
@@ -83,18 +86,19 @@
                 android:id="@+id/option_c_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{String.format(@string/question_option_c, questionViewModel.currentQuestionOptionC)}" />
+                android:text="@{localeCheck.isLocaleIndonesia() ? String.format(@string/question_option_c, questionViewModel.currentIdQuestionOptionC) : String.format(@string/question_option_c, questionViewModel.currentEnQuestionOptionC)}" />
 
             <TextView
                 android:id="@+id/option_d_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="@{String.format(@string/question_option_d, questionViewModel.currentQuestionOptionD)}" />
+                android:text="@{localeCheck.isLocaleIndonesia() ? String.format(@string/question_option_d, questionViewModel.currentIdQuestionOptionD) : String.format(@string/question_option_d, questionViewModel.currentEnQuestionOptionD)}" />
         </LinearLayout>
 
         <EditText
             android:id="@+id/noteEditText"
+            android:maxLength="25"
             android:layout_width="257dp"
             android:layout_height="76dp"
             android:layout_marginTop="15dp"
@@ -110,7 +114,7 @@
             android:id="@+id/radioGroup2"
             android:layout_width="match_parent"
             android:layout_height="83dp"
-            android:layout_marginTop="156dp"
+            android:layout_marginTop="130dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -128,23 +132,23 @@
 
                 <RadioButton
                     android:id="@+id/radio_a"
-                    android:checked="@{optionsViewModel.optionChecked.equals(OptionsViewModel.OPTION_A)}"
-                    android:onClick="@{()->optionsViewModel.setOptionChecked(OptionsViewModel.OPTION_A)}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_marginEnd="100dp"
                     android:layout_gravity="center"
+                    android:layout_marginEnd="100dp"
+                    android:checked="@{optionsViewModel.optionChecked.equals(OptionsViewModel.OPTION_A)}"
+                    android:gravity="center"
+                    android:onClick="@{()->optionsViewModel.setOptionChecked(OptionsViewModel.OPTION_A)}"
                     android:text="@string/option_a" />
 
                 <RadioButton
                     android:id="@+id/radio_c"
-                    android:checked="@{optionsViewModel.optionChecked.equals(OptionsViewModel.OPTION_C)}"
-                    android:onClick="@{()->optionsViewModel.setOptionChecked(OptionsViewModel.OPTION_C)}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_gravity="center"
+                    android:checked="@{optionsViewModel.optionChecked.equals(OptionsViewModel.OPTION_C)}"
+                    android:gravity="center"
+                    android:onClick="@{()->optionsViewModel.setOptionChecked(OptionsViewModel.OPTION_C)}"
                     android:text="@string/option_c" />
 
                 <View
@@ -165,23 +169,23 @@
 
                 <RadioButton
                     android:id="@+id/radio_b"
-                    android:checked="@{optionsViewModel.optionChecked.equals(OptionsViewModel.OPTION_B)}"
-                    android:onClick="@{()->optionsViewModel.setOptionChecked(OptionsViewModel.OPTION_B)}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="100dp"
-                    android:gravity="center"
                     android:layout_gravity="center"
+                    android:layout_marginEnd="100dp"
+                    android:checked="@{optionsViewModel.optionChecked.equals(OptionsViewModel.OPTION_B)}"
+                    android:gravity="center"
+                    android:onClick="@{()->optionsViewModel.setOptionChecked(OptionsViewModel.OPTION_B)}"
                     android:text="@string/option_b" />
 
                 <RadioButton
                     android:id="@+id/radio_d"
-                    android:checked="@{optionsViewModel.optionChecked.equals(OptionsViewModel.OPTION_D)}"
-                    android:onClick="@{()->optionsViewModel.setOptionChecked(OptionsViewModel.OPTION_D)}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_gravity="center"
+                    android:checked="@{optionsViewModel.optionChecked.equals(OptionsViewModel.OPTION_D)}"
+                    android:gravity="center"
+                    android:onClick="@{()->optionsViewModel.setOptionChecked(OptionsViewModel.OPTION_D)}"
                     android:text="@string/option_d" />
 
                 <View

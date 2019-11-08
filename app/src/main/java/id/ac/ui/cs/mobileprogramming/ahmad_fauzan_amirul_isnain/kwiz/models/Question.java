@@ -9,25 +9,41 @@ public class Question {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
-    private String content;
+    private String enContent;
 
-    private String optionA;
+    private String enOptionA;
 
-    private String optionB;
+    private String enOptionB;
 
-    private String optionC;
+    private String enOptionC;
 
-    private String optionD;
+    private String enOptionD;
+
+    private String idContent;
+
+    private String idOptionA;
+
+    private String idOptionB;
+
+    private String idOptionC;
+
+    private String idOptionD;
 
     private String answer;
 
-    public Question(String content, String optionA, String optionB,
-                    String optionC, String optionD, String answer){
-        this.content = content;
-        this.optionA = optionA;
-        this.optionB = optionB;
-        this.optionC = optionC;
-        this.optionD = optionD;
+    public Question(String enContent, String enOptionA, String enOptionB, String enOptionC, String enOptionD,
+                    String idContent, String idOptionA, String idOptionB, String idOptionC, String idOptionD,
+                    String answer){
+        this.enContent = enContent;
+        this.enOptionA = enOptionA;
+        this.enOptionB = enOptionB;
+        this.enOptionC = enOptionC;
+        this.enOptionD = enOptionD;
+        this.idContent = idContent;
+        this.idOptionA = idOptionA;
+        this.idOptionB = idOptionB;
+        this.idOptionC = idOptionC;
+        this.idOptionD = idOptionD;
         this.answer = answer;
     }
 
@@ -35,35 +51,51 @@ public class Question {
         this.id = id;
     }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
-
     public int getId() {
         return id;
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    public String getOptionA() {
-        return optionA;
-    }
-
-    public String getOptionB() {
-        return optionB;
-    }
-
-    public String getOptionC() {
-        return optionC;
-    }
-
-    public String getOptionD() {
-        return optionD;
-    }
-
     public String getAnswer() {
         return answer;
+    }
+
+    public String getEnContent() {
+        return enContent;
+    }
+
+    public String getEnOptionA() {
+        return enOptionA;
+    }
+
+    public String getEnOptionB() {
+        return enOptionB;
+    }
+
+    public String getEnOptionC() {
+        return enOptionC;
+    }
+
+    public String getEnOptionD() {
+        return enOptionD;
+    }
+
+    public String getIdContent() {
+        return idContent;
+    }
+
+    public String getIdOptionA() {
+        return idOptionA;
+    }
+
+    public String getIdOptionB() {
+        return idOptionB;
+    }
+
+    public String getIdOptionC() {
+        return idOptionC;
+    }
+
+    public String getIdOptionD() {
+        return idOptionD;
     }
 }

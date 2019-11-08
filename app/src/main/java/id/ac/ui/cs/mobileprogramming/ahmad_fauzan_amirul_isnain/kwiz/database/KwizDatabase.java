@@ -71,6 +71,12 @@ public abstract class KwizDatabase extends RoomDatabase {
                             "200 minute",
                             "5 minute",
                             "0 minute",
+                            "5 kucing memakan 5 ikan dalam 5 menit. Berapa menit waktu " +
+                                    "yang dibutuhkan 200 kucing untuk memakan 200 ikan?",
+                            "1 menit",
+                            "200 menit",
+                            "5 menit",
+                            "0 menit",
                             "C"
                     )
             );
@@ -82,6 +88,11 @@ public abstract class KwizDatabase extends RoomDatabase {
                             "October",
                             "February",
                             "January",
+                            "Pada bulan apa orang-orang paling sedikit tidur?",
+                            "Desember",
+                            "Oktober",
+                            "Februari",
+                            "Januari",
                             "C"
                     )
             );
@@ -93,19 +104,31 @@ public abstract class KwizDatabase extends RoomDatabase {
                             "28",
                             "75",
                             "100",
+                            "Berapa kali huruf a muncul dari 0-200?",
+                            "0",
+                            "28",
+                            "75",
+                            "100",
                             "A"
                     )
             );
 
             questionDao.insert(
                     new Question(
-                            "If you had only one match, and entered a dark room containing " +
+                            "If you had only one match, then entered a dark room containing " +
                                     "an oil lamp, some newspaper, and some kindling wood, which " +
                                     "would you light first?",
                             "Oil Lamp",
                             "Match",
                             "Wood",
                             "Newspaper",
+                            "Jika kamu memiliki sebuah korek, kemudian memasuki sebuah ruangan " +
+                                    "yang di dalamnya terdapat lampu minyak, beberapa koran, beberapa kayu " +
+                                    "bakar, apa yang akan kamu nyalakan terlebih dahulu?",
+                            "Lampu minyak",
+                            "Korek",
+                            "Kayu",
+                            "Koran",
                             "B"
                     )
             );
@@ -113,6 +136,11 @@ public abstract class KwizDatabase extends RoomDatabase {
             questionDao.insert(
                     new Question(
                             "If there are 12 fish and half of them drown, how many are there?",
+                            "6",
+                            "10",
+                            "3",
+                            "12",
+                            "Jika ada 12 ikan dan separuh dari mereka tenggelam, ada berapa ikan disana?",
                             "6",
                             "10",
                             "3",
@@ -128,6 +156,11 @@ public abstract class KwizDatabase extends RoomDatabase {
                             "5",
                             "2",
                             "1",
+                            "Berapa kali kamu bisa mengurangi 10 dari 100?",
+                            "10",
+                            "5",
+                            "2",
+                            "1",
                             "D"
                     )
             );
@@ -139,6 +172,11 @@ public abstract class KwizDatabase extends RoomDatabase {
                             "Feathers",
                             "No one",
                             "Cottons",
+                            "Manakah yang lebih berat, 100 pound batu atau 100 pound bulu?",
+                            "Batu",
+                            "Bulu",
+                            "Tidak ada",
+                            "Kapas",
                             "C"
                     )
             );
@@ -152,6 +190,13 @@ public abstract class KwizDatabase extends RoomDatabase {
                             "1 hour",
                             "1.5 hour",
                             "2 hour",
+                            "Jika seorang doktor memberimu 3 pil dan menyuruhmu untuk " +
+                                    "makan satu pil setiap setengah jam, berapa lama waktu yang " +
+                                    "dibutuhkan hingga semua pil termakan?",
+                            "0.5 jam",
+                            "1 jam",
+                            "1.5 jam",
+                            "2 jam",
                             "B"
                     )
             );
@@ -163,6 +208,12 @@ public abstract class KwizDatabase extends RoomDatabase {
                             "2",
                             "9",
                             "12",
+                            "Beberapa bulan memiliki 31 hari, beberapa lainnya memiliki 30 hari. " +
+                                    "Berapa banyak bulan yang memiliki 28 hari?",
+                            "1",
+                            "2",
+                            "9",
+                            "12",
                             "D"
                     )
             );
@@ -170,6 +221,12 @@ public abstract class KwizDatabase extends RoomDatabase {
             questionDao.insert(
                     new Question(
                             "If you divide 30 by half and add ten, what do you get?",
+                            "25",
+                            "40",
+                            "70",
+                            "100",
+                            "Jika kamu membagi 30 dengan setengah kemudian menambahkannya " +
+                                    "dengan sepuluh, maka berapa hasilnya?",
                             "25",
                             "40",
                             "70",

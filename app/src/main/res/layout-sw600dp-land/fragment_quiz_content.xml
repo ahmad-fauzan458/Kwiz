@@ -12,6 +12,9 @@
         <variable
             name="questionViewModel"
             type="id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.QuestionViewModel" />
+        <variable
+            name="localeCheck"
+            type="id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.util.LocaleCheck" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/fragmentQuizContent"
@@ -38,8 +41,8 @@
             android:layout_height="wrap_content"
             android:paddingStart="40dp"
             android:paddingEnd="40dp"
-            android:text="@{questionViewModel.currentQuestion}"
-            android:textSize="36sp"
+            android:text="@{localeCheck.isLocaleIndonesia() ? questionViewModel.currentIdQuestion : questionViewModel.currentEnQuestion}"
+            android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.532"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,6 +50,7 @@
 
         <EditText
             android:id="@+id/noteEditText"
+            android:maxLength="25"
             android:layout_width="257dp"
             android:layout_height="76dp"
             android:layout_marginStart="48dp"
@@ -88,7 +92,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
-                        android:text="@{String.format(@string/question_option_a, questionViewModel.currentQuestionOptionA)}"
+                        android:text="@{localeCheck.isLocaleIndonesia() ? String.format(@string/question_option_a, questionViewModel.currentIdQuestionOptionA) : String.format(@string/question_option_a, questionViewModel.currentEnQuestionOptionA)}"
                         android:textSize="30sp" />
 
                     <TextView
@@ -96,7 +100,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="32dp"
-                        android:text="@{String.format(@string/question_option_b, questionViewModel.currentQuestionOptionB)}"
+                        android:text="@{localeCheck.isLocaleIndonesia() ? String.format(@string/question_option_b, questionViewModel.currentIdQuestionOptionB) : String.format(@string/question_option_b, questionViewModel.currentEnQuestionOptionB)}"
                         android:textSize="30sp" />
                 </LinearLayout>
 
@@ -113,7 +117,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
-                        android:text="@{String.format(@string/question_option_c, questionViewModel.currentQuestionOptionC)}"
+                        android:text="@{localeCheck.isLocaleIndonesia() ? String.format(@string/question_option_c, questionViewModel.currentIdQuestionOptionC) : String.format(@string/question_option_c, questionViewModel.currentEnQuestionOptionC)}"
                         android:textSize="30sp" />
 
                     <TextView
@@ -121,7 +125,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="32dp"
-                        android:text="@{String.format(@string/question_option_d, questionViewModel.currentQuestionOptionD)}"
+                        android:text="@{localeCheck.isLocaleIndonesia() ? String.format(@string/question_option_d, questionViewModel.currentIdQuestionOptionD) : String.format(@string/question_option_d, questionViewModel.currentEnQuestionOptionD)}"
                         android:textSize="30sp" />
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
