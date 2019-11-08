@@ -1,6 +1,7 @@
 package id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.quiz;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -16,6 +17,7 @@ import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -26,14 +28,13 @@ import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.repositorie
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.util.ExternalStoragePermissions;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.databinding.FragmentQuizResultBinding;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.interfaces.QuizResultInterface;
+import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.MedalViewModel;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.UserViewModel;
 
 public class QuizResultFragment extends Fragment implements QuizResultInterface {
 
-    private String medalGold;
-    private String medalSilver;
-    private String medalBronze;
     private UserViewModel userViewModel;
+    private MedalViewModel medalViewModel;
 
     public static QuizResultFragment newInstance() {
         return new QuizResultFragment();
@@ -44,6 +45,7 @@ public class QuizResultFragment extends Fragment implements QuizResultInterface 
         super.onCreate(savedInstanceState);
         QuizActivity quizActivity = (QuizActivity) getActivity();
         quizActivity.stopTimer();
+        userViewModel = ViewModelProviders.of(getActivity()).get(UserViewModel.class);
         if (savedInstanceState == null) {
             userViewModel.saveData();
         }
@@ -55,20 +57,17 @@ public class QuizResultFragment extends Fragment implements QuizResultInterface 
         FragmentQuizResultBinding binding =
                 FragmentQuizResultBinding.inflate(inflater, container, false);
         binding.setQuizResultInterface(this);
-        userViewModel = ViewModelProviders.of(getActivity()).get(UserViewModel.class);
         binding.setUserViewModel(userViewModel);
+        medalViewModel = ViewModelProviders.of(getActivity()).get(MedalViewModel.class);
+        medalViewModel.setMedal(userViewModel.getScore().getValue());
+        binding.setMedalViewModel(medalViewModel);
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         ExternalStoragePermissions.verifyStoragePermissions(getActivity());
-
-        medalGold = createImageOnData(R.drawable.medal_gold);
-        medalSilver = createImageOnData(R.drawable.medal_silver);
-        medalBronze = createImageOnData(R.drawable.medal_bronze);
     }
 
     /**
@@ -114,6 +113,22 @@ public class QuizResultFragment extends Fragment implements QuizResultInterface 
 
     @Override
     public void share(){
-        onShareMedal(medalGold);
+        if (!ExternalStoragePermissions.isPermissionStorageGranted(getActivity())) {
+            Toast.makeText(getContext(), getContext()
+                    .getResources()
+                    .getString(R.string.allow_storage_permission), Toast.LENGTH_LONG).show();
+            ExternalStoragePermissions.requestStoragePermission(getActivity());
+            return;
+        }
+
+        String medal;
+        if (medalViewModel.getName().getValue().equals(QuizActivity.GOLD_MEDAL)) {
+            medal = createImageOnData(R.drawable.medal_gold);
+        } else if (medalViewModel.getName().getValue().equals(QuizActivity.SILVER_MEDAL)) {
+            medal = createImageOnData(R.drawable.medal_silver);
+        } else {
+            medal = createImageOnData(R.drawable.medal_bronze);
+        }
+        onShareMedal(medal);
     }
 }

@@ -19,6 +19,9 @@ public class QuizActivity extends AppCompatActivity {
 
     public static final Integer QUIZ_TIME = 100;
     public static final Integer CORRECT_SCORE = 100;
+    public static final String GOLD_MEDAL = "Gold";
+    public static final String SILVER_MEDAL = "Silver";
+    public static final String BRONZE_MEDAL = "Bronze";
 
     private TimerViewModel timerViewModel;
     private UserViewModel userViewModel;

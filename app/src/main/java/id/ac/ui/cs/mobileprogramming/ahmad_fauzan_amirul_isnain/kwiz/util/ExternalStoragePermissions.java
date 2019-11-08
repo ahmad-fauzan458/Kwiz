@@ -21,14 +21,22 @@ public class ExternalStoragePermissions {
      * @param activity
      */
     public static void verifyStoragePermissions(Activity activity) {
-        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-
-        if (permission != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(
-                    activity,
-                    PERMISSIONS_STORAGE,
-                    REQUEST_EXTERNAL_STORAGE
-            );
+        if (!isPermissionStorageGranted(activity)) {
+            requestStoragePermission(activity);
         }
+
+    }
+
+    public static boolean isPermissionStorageGranted(Activity activity){
+        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) ;
+        return permission == PackageManager.PERMISSION_GRANTED ;
+    }
+
+    public static void requestStoragePermission(Activity activity) {
+        ActivityCompat.requestPermissions(
+                activity,
+                PERMISSIONS_STORAGE,
+                REQUEST_EXTERNAL_STORAGE
+        );
     }
 }

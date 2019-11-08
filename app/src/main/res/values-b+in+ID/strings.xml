@@ -26,7 +26,7 @@
     <string name="your_score">Skormu:</string>
     <string name="name_placeholder">Nama...</string>
     <string name="score_placeholder">Skor...</string>
-    <string name="medal_text_placeholder">Kamu mendapatkan medali [nama_medali]!</string>
+    <string name="you_got_medal">Kamu Mendapatkan Medali %s!</string>
     <string name="home">Beranda</string>
     <string name="share">Bagikan</string>
     <string name="time_pointer">Waktu: %s</string>
@@ -45,4 +45,5 @@
     <string name="anonymous">Anonim</string>
     <string name="confirm">Konfirmasi</string>
     <string name="cancel">Batal</string>
+    <string name="allow_storage_permission">Tolong izinkan storage permission terlebih dahulu</string>
 </resources>
