@@ -35,6 +35,9 @@ public class QuizResultFragment extends Fragment implements QuizResultInterface 
 
     private UserViewModel userViewModel;
     private MedalViewModel medalViewModel;
+    private String goldMedal;
+    private String silverMedal;
+    private String bronzeMedal;
 
     public static QuizResultFragment newInstance() {
         return new QuizResultFragment();
@@ -68,6 +71,9 @@ public class QuizResultFragment extends Fragment implements QuizResultInterface 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ExternalStoragePermissions.verifyStoragePermissions(getActivity());
+        goldMedal = createImageOnData(R.drawable.medal_gold);
+        silverMedal = createImageOnData(R.drawable.medal_silver);
+        bronzeMedal = createImageOnData(R.drawable.medal_bronze);
     }
 
     /**
@@ -123,11 +129,11 @@ public class QuizResultFragment extends Fragment implements QuizResultInterface 
 
         String medal;
         if (medalViewModel.getName().getValue().equals(QuizActivity.GOLD_MEDAL)) {
-            medal = createImageOnData(R.drawable.medal_gold);
+            medal = (goldMedal == null) ? createImageOnData(R.drawable.medal_gold) : goldMedal;
         } else if (medalViewModel.getName().getValue().equals(QuizActivity.SILVER_MEDAL)) {
-            medal = createImageOnData(R.drawable.medal_silver);
+            medal = (silverMedal == null) ? createImageOnData(R.drawable.medal_silver) : silverMedal;
         } else {
-            medal = createImageOnData(R.drawable.medal_bronze);
+            medal = (bronzeMedal == null) ? createImageOnData(R.drawable.medal_bronze) : bronzeMedal;
         }
         onShareMedal(medal);
     }
