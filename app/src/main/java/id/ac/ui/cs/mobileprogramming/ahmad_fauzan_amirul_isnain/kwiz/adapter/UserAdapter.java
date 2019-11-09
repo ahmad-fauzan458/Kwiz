@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.databinding.LeaderboardItemBinding;
@@ -14,10 +15,14 @@ import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.models.User
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder>{
     private List<User> userList;
 
-    public UserAdapter(List<User> userList) {
-        this.userList = userList;
+    public UserAdapter() {
+        this.userList = new ArrayList<>();
     }
 
+    public void setUsers(List<User> users) {
+        this.userList = users;
+        notifyDataSetChanged();
+    }
     @Override
     public int getItemCount() {
         return userList != null ? userList.size() : 0;

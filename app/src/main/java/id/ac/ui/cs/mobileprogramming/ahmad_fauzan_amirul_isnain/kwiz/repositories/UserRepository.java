@@ -3,6 +3,8 @@ package id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.repositori
 import android.app.Application;
 import android.os.AsyncTask;
 
+import androidx.lifecycle.LiveData;
+
 import java.util.List;
 
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.dao.UserDao;
@@ -11,10 +13,12 @@ import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.models.User
 
 public class UserRepository {
     private UserDao userDao;
+    private LiveData<List<User>> allUsers;
 
     public UserRepository(Application application) {
         KwizDatabase database = KwizDatabase.getInstance(application);
         userDao = database.userDao();
+        allUsers = userDao.getAllUsers();
     }
 
     public void insert(User user) {
@@ -29,8 +33,8 @@ public class UserRepository {
         new DeleteUserAsyncTask(userDao).execute(user);
     }
 
-    public List<User> getAllUsers(){
-        return userDao.getAllUsers();
+    public LiveData<List<User>> getAllUsers(){
+        return allUsers;
     }
 
     private static class InsertUserAsyncTask extends AsyncTask<User, Void, Void> {

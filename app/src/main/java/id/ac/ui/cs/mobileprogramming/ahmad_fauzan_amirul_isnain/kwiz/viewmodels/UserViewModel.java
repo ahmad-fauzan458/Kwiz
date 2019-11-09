@@ -68,7 +68,7 @@ public class UserViewModel extends AndroidViewModel {
                 medalRepository.getFirstMedalLessThanScore(this.score.getValue()).getId()));
     }
 
-    public List<User> getAllUsers() {
+    public LiveData<List<User>> getAllUsers() {
         return userRepository.getAllUsers();
     }
 

@@ -1,5 +1,6 @@
 package id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -23,5 +24,5 @@ public interface UserDao {
     void delete(User user);
 
     @Query("SELECT * from user ORDER BY score DESC")
-    List<User> getAllUsers();
+    LiveData<List<User>> getAllUsers();
 }
