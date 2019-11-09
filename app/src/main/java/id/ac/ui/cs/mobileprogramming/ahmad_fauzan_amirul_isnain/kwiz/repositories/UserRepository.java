@@ -37,6 +37,10 @@ public class UserRepository {
         return allUsers;
     }
 
+    public User getFirstRank(){
+        return userDao.getFirstRank();
+    }
+
     private static class InsertUserAsyncTask extends AsyncTask<User, Void, Void> {
         private UserDao userDao;
 

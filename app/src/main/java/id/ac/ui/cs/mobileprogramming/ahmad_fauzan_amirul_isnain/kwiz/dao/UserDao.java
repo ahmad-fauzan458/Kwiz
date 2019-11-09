@@ -25,4 +25,7 @@ public interface UserDao {
 
     @Query("SELECT * from user ORDER BY score DESC")
     LiveData<List<User>> getAllUsers();
+
+    @Query("SELECT * from user ORDER BY score DESC LIMIT 1")
+    User getFirstRank();
 }
