@@ -33,7 +33,7 @@ public class LeaderboardFragment extends Fragment {
 
 
     private void setUpRecyclerView() {
-        RecyclerView recyclerView = fragmentLeaderboardBinding.rvUserList; // In xml we have given id rv_movie_list to RecyclerView
+        RecyclerView recyclerView = fragmentLeaderboardBinding.rvUserList;
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
