@@ -1,6 +1,11 @@
 package id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.quiz;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -10,6 +15,10 @@ import androidx.lifecycle.ViewModelProviders;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.R;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.databinding.FragmentQuizContentBinding;
@@ -93,5 +102,28 @@ public class QuizContentFragment extends Fragment implements QuizContentInterfac
                     }
                 });
         alertDialog.show();
+    }
+
+    public void showHint(){
+        ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        if (activeNetwork != null) {
+            String escapedQuery = "";
+            try {
+                escapedQuery = URLEncoder.encode(questionViewModel.getCurrentEnQuestion()
+                        .getValue(), "UTF-8");
+            }
+            catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            Uri uri = Uri.parse("http://www.google.com/#q=" + escapedQuery);
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(intent);
+        } else {
+            Toast.makeText(getActivity(),
+                    getActivity().getResources().getString(R.string.connectivity_request),
+                    Toast.LENGTH_SHORT)
+                    .show();
+        }
     }
 }

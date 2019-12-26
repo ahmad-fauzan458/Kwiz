@@ -53,4 +53,8 @@
     sehingga kami bisa mengirimnya, hal ini juga memerlukan izin darimu.
     Tolong terima permintaan izinnya jika kamu mau membagikan medalimu.
     </string>
+    <string name="hint">Petunjuk</string>
+    <string name="connectivity_request">
+    Silakan nyalakan koneksi internetmu jika kamu ingin mengakses petunjuk.
+    </string>
 </resources>
