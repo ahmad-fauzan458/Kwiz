@@ -48,13 +48,18 @@
     <string name="write_note_permission_content">Tolong izinkan storage permission atau kosongkan catatan</string>
     <string name="why_need_permission_title">Mengapa memerlukan izin?</string>
     <string name="why_need_permission_content">
-    Untuk membagikan medal, pertama, kami perlu menulis asset medali kami ke external storagemu,
+    Untuk membagikan medal:
+    \nPertama, kami perlu menulis asset medali kami ke external storagemu,
     hal ini memerlukan izin darimu. Kemudian, kami perlu membaca dari external storagemu,
     sehingga kami bisa mengirimnya, hal ini juga memerlukan izin darimu.
-    Tolong terima permintaan izinnya jika kamu mau membagikan medalimu.
+    \n\nUntuk menyimpan catatan:
+    \nKami perlu menulis catatan tersebut ke external storagemu,
+    hal ini memerlukan izin darimu.
     </string>
     <string name="hint">Petunjuk</string>
     <string name="connectivity_request">
     Silakan nyalakan koneksi internetmu jika kamu ingin mengakses petunjuk.
     </string>
+    <string name="save_notes">Simpan Catatan</string>
+    <string name="save_notes_success">Catatan berhasil disimpan</string>
 </resources>

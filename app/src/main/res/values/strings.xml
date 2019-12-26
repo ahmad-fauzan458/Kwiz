@@ -48,13 +48,19 @@
     <string name="write_note_permission_content">Please allow storage permission or empty the note</string>
     <string name="why_need_permission_title">Why need permission?</string>
     <string name="why_need_permission_content">
-    For sharing medal, first, we need to write our medal asset to your external storage,
+    For sharing medal:
+    \nFirst, we need to write our medal asset to your external storage,
     it needs your permission. Then, we need to read from your external
     storage so we can send it, it needs your permission too.
-    Please accept the permission request if you want to share your medal.
+    \n\nFor saving the note:
+    \nWe need to write the note to your external storage,
+    it needs your permission.
     </string>
     <string name="hint">Hint</string>
     <string name="connectivity_request">
     Please turn on your internet connection if you want to access hint.
     </string>
+    <string name="save_notes">Save Note</string>
+    <string name="save_notes_success">The note saved successfully</string>
+
 </resources>

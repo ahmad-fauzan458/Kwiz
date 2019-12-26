@@ -5,4 +5,6 @@ public interface QuizResultInterface {
     void home();
 
     void share();
+
+    void saveNotes();
 }

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
             name="quizResultInterface"
@@ -8,9 +10,7 @@
             name="medalViewModel"
             type="id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.MedalViewModel" />
     </data>
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/fragmentQuizResult"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -84,7 +84,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/share"
-                        android:layout_marginRight="20dp"/>
+                        android:layout_marginEnd="20dp"/>
+
+                    <Button
+                        android:id="@+id/save_notes_button"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:layout_weight="1"
+                        android:onClick="@{() -> quizResultInterface.saveNotes()}"
+                        android:text="@string/save_notes" />
 
                     <Button
                         android:id="@+id/home_button"

@@ -16,16 +16,22 @@ import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
+
+import java.util.Calendar;
+import java.util.Date;
 
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.R;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.util.ExternalStoragePermissions;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.databinding.FragmentQuizResultBinding;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.interfaces.QuizResultInterface;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.MedalViewModel;
+import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.NoteViewModel;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.UserViewModel;
 
 public class QuizResultFragment extends Fragment implements QuizResultInterface {
@@ -35,6 +41,11 @@ public class QuizResultFragment extends Fragment implements QuizResultInterface 
     private String goldMedal;
     private String silverMedal;
     private String bronzeMedal;
+    private NoteViewModel noteViewModel;
+
+    private int permissionRequestFlag;
+    private final int SHARE_MEDAL_FLAG = 0;
+    private final int SAVE_NOTES_FLAG = 1;
 
     public static QuizResultFragment newInstance() {
         return new QuizResultFragment();
@@ -49,6 +60,7 @@ public class QuizResultFragment extends Fragment implements QuizResultInterface 
         if (savedInstanceState == null) {
             userViewModel.saveData();
         }
+        noteViewModel = ViewModelProviders.of(getActivity()).get(NoteViewModel.class);
     }
 
     @Override
@@ -113,6 +125,7 @@ public class QuizResultFragment extends Fragment implements QuizResultInterface 
     @Override
     public void share(){
         if (!ExternalStoragePermissions.isPermissionStorageGranted(getActivity())) {
+            permissionRequestFlag = SHARE_MEDAL_FLAG;
             ExternalStoragePermissions.requestStoragePermission(this);
             return;
         }
@@ -126,7 +139,11 @@ public class QuizResultFragment extends Fragment implements QuizResultInterface 
                                            @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (ExternalStoragePermissions.isPermissionStorageGranted(getActivity())){
-            onShareMedal(getMedal());
+            if (permissionRequestFlag == SHARE_MEDAL_FLAG) {
+                onShareMedal(getMedal());
+            } else if (permissionRequestFlag == SAVE_NOTES_FLAG) {
+                saveNotes();
+            }
         } else {
             getFragmentManager().beginTransaction()
                     .replace(R.id.quizContent, PermissionExplanationFragment.newInstance())
@@ -148,6 +165,40 @@ public class QuizResultFragment extends Fragment implements QuizResultInterface 
                     bronzeMedal = createImageOnData(R.drawable.medal_bronze) : bronzeMedal;
         }
         return medal;
+    }
+
+    public void saveNotes() {
+        if (!ExternalStoragePermissions.isPermissionStorageGranted(getActivity())) {
+            permissionRequestFlag = SAVE_NOTES_FLAG;
+            ExternalStoragePermissions.requestStoragePermission(this);
+            return;
+        }
+
+        writeNotesToFile();
+        Toast.makeText(getActivity(),
+                getActivity().getResources().getString(R.string.save_notes_success), Toast.LENGTH_SHORT)
+                .show();
+    }
+
+    private void writeNotesToFile() {
+        if (noteViewModel.getFullNote().getValue() == null ||
+                noteViewModel.getFullNote().getValue().equals("")){
+            return;
+        }
+
+        Date currentTime = Calendar.getInstance().getTime();
+        String path = Environment.getExternalStorageDirectory() + "/KwizNotes" + currentTime.getTime() + ".txt";
+        File file = new File(path);
+        try {
+            FileOutputStream f = new FileOutputStream(file);
+            PrintWriter pw = new PrintWriter(f);
+            pw.println(noteViewModel.getFullNote().getValue());
+            pw.flush();
+            pw.close();
+            f.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
