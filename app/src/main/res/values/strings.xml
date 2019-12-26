@@ -46,4 +46,11 @@
     <string name="allow_storage_permission">Please allow storage permission first</string>
     <string name="write_note_permission">Storage Permission Not Granted</string>
     <string name="write_note_permission_content">Please allow storage permission or empty the note</string>
+    <string name="why_need_permission_title">Why need permission?</string>
+    <string name="why_need_permission_content">
+    For sharing medal, first, we need to write our medal asset to your external storage,
+    it needs your permission. Then, we need to read from your external
+    storage so we can send it, it needs your permission too.
+    Please accept the permission request if you want to share your medal.
+    </string>
 </resources>

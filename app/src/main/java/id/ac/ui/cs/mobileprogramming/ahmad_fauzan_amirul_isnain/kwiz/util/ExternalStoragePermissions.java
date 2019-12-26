@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.pm.PackageManager;
 
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
 
 public class ExternalStoragePermissions {
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
@@ -13,28 +14,14 @@ public class ExternalStoragePermissions {
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
 
-    /**
-     * Checks if the app has permission to write to device storage
-     *
-     * If the app does not has permission then the user will be prompted to grant permissions
-     *
-     * @param activity
-     */
-    public static void verifyStoragePermissions(Activity activity) {
-        if (!isPermissionStorageGranted(activity)) {
-            requestStoragePermission(activity);
-        }
-
-    }
-
     public static boolean isPermissionStorageGranted(Activity activity){
-        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) ;
-        return permission == PackageManager.PERMISSION_GRANTED ;
+        int writePermission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) ;
+        int readPermission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.READ_EXTERNAL_STORAGE) ;
+        return writePermission == PackageManager.PERMISSION_GRANTED && readPermission == PackageManager.PERMISSION_GRANTED;
     }
 
-    public static void requestStoragePermission(Activity activity) {
-        ActivityCompat.requestPermissions(
-                activity,
+    public static void requestStoragePermission(Fragment fragment) {
+        fragment.requestPermissions(
                 PERMISSIONS_STORAGE,
                 REQUEST_EXTERNAL_STORAGE
         );

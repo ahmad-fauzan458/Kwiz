@@ -56,7 +56,7 @@ public class QuizContentFragment extends Fragment implements QuizContentInterfac
                 && !noteViewModel.getNote().getValue().equals("")
                 && !ExternalStoragePermissions.isPermissionStorageGranted(getActivity())){
             showErrorNoPermissionToSaveNote();
-            ExternalStoragePermissions.requestStoragePermission(getActivity());
+            ExternalStoragePermissions.requestStoragePermission(this);
             return;
         }
 

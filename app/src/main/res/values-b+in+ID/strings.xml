@@ -46,4 +46,11 @@
     <string name="allow_storage_permission">Tolong izinkan storage permission terlebih dahulu</string>
     <string name="write_note_permission">Storage Permission Tidak Diberikan</string>
     <string name="write_note_permission_content">Tolong izinkan storage permission atau kosongkan catatan</string>
+    <string name="why_need_permission_title">Mengapa memerlukan izin?</string>
+    <string name="why_need_permission_content">
+    Untuk membagikan medal, pertama, kami perlu menulis asset medali kami ke external storagemu,
+    hal ini memerlukan izin darimu. Kemudian, kami perlu membaca dari external storagemu,
+    sehingga kami bisa mengirimnya, hal ini juga memerlukan izin darimu.
+    Tolong terima permintaan izinnya jika kamu mau membagikan medalimu.
+    </string>
 </resources>

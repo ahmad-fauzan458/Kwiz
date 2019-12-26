@@ -1,7 +1,6 @@
 package id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.quiz;
 
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -17,14 +16,12 @@ import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.R;
-import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.repositories.UserRepository;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.util.ExternalStoragePermissions;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.databinding.FragmentQuizResultBinding;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.interfaces.QuizResultInterface;
@@ -70,10 +67,6 @@ public class QuizResultFragment extends Fragment implements QuizResultInterface 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ExternalStoragePermissions.verifyStoragePermissions(getActivity());
-        goldMedal = createImageOnData(R.drawable.medal_gold);
-        silverMedal = createImageOnData(R.drawable.medal_silver);
-        bronzeMedal = createImageOnData(R.drawable.medal_bronze);
     }
 
     /**
@@ -120,21 +113,41 @@ public class QuizResultFragment extends Fragment implements QuizResultInterface 
     @Override
     public void share(){
         if (!ExternalStoragePermissions.isPermissionStorageGranted(getActivity())) {
-            Toast.makeText(getContext(), getContext()
-                    .getResources()
-                    .getString(R.string.allow_storage_permission), Toast.LENGTH_LONG).show();
-            ExternalStoragePermissions.requestStoragePermission(getActivity());
+            ExternalStoragePermissions.requestStoragePermission(this);
             return;
         }
 
+        onShareMedal(getMedal());
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (ExternalStoragePermissions.isPermissionStorageGranted(getActivity())){
+            onShareMedal(getMedal());
+        } else {
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.quizContent, PermissionExplanationFragment.newInstance())
+                    .addToBackStack(null)
+                    .commit();
+        }
+    }
+
+    private String getMedal() {
         String medal;
         if (medalViewModel.getName().getValue().equals(QuizActivity.GOLD_MEDAL)) {
-            medal = (goldMedal == null) ? createImageOnData(R.drawable.medal_gold) : goldMedal;
+            medal = (goldMedal == null) ?
+                    goldMedal = createImageOnData(R.drawable.medal_gold) : goldMedal;
         } else if (medalViewModel.getName().getValue().equals(QuizActivity.SILVER_MEDAL)) {
-            medal = (silverMedal == null) ? createImageOnData(R.drawable.medal_silver) : silverMedal;
+            medal = (silverMedal == null) ?
+                    silverMedal = createImageOnData(R.drawable.medal_silver) : silverMedal;
         } else {
-            medal = (bronzeMedal == null) ? createImageOnData(R.drawable.medal_bronze) : bronzeMedal;
+            medal = (bronzeMedal == null) ?
+                    bronzeMedal = createImageOnData(R.drawable.medal_bronze) : bronzeMedal;
         }
-        onShareMedal(medal);
+        return medal;
     }
+
 }
