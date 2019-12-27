@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
             name="userViewModel"
@@ -8,9 +10,7 @@
             name="homeInterface"
             type="id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.interfaces.HomeInterface" />
     </data>
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/fragmentHome"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -29,19 +29,41 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/usernameEditText"
-            android:text="@={userViewModel.name}"
-            android:layout_width="314dp"
-            android:layout_height="40dp"
+        <LinearLayout
+            android:id="@+id/linearLayoutUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:ems="10"
-            android:hint="@string/fill_thix_box_with_your_name"
-            android:inputType="textPersonName"
-            android:maxLength="20"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/textView">
+
+            <EditText
+                android:id="@+id/usernameEditText"
+                android:layout_width="230dp"
+                android:layout_height="62dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="15dp"
+                android:ems="10"
+                android:hint="@string/fill_thix_box_with_your_name"
+                android:inputType="textPersonName"
+                android:maxLength="20"
+                android:text="@={userViewModel.name}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+            <Button
+                android:id="@+id/generateNameButton"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_marginEnd="10dp"
+                android:onClick="@{() -> homeInterface.generateName()}"
+                android:text="@string/generate_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/usernameEditText"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/startButton"
@@ -53,7 +75,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.501"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/usernameEditText" />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutUsername" />
 
         <Button
             android:id="@+id/exitButton"

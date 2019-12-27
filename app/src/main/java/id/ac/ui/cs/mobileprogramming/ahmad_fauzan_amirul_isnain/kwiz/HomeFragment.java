@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.
 
 public class HomeFragment extends Fragment implements HomeInterface {
     private UserViewModel userViewModel;
+    private static final int GENERATE_NAME_LENGTH = 7;
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
@@ -50,4 +52,19 @@ public class HomeFragment extends Fragment implements HomeInterface {
         intent.putExtra("username", userViewModel.getName().getValue());
         startActivity(intent);
     }
+
+    public void generateName(){
+        userViewModel.setName(generateNameHelper());
+    }
+
+    private String generateNameHelper(){
+        String name = generateName(GENERATE_NAME_LENGTH);
+        if (name.equals(userViewModel.getName().getValue())){
+            name = generateNameHelper();
+        }
+        return name;
+    }
+
+    public native String generateName(int length);
+
 }

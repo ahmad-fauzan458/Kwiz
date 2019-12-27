@@ -63,4 +63,5 @@
     <string name="save_notes">Simpan Catatan</string>
     <string name="save_notes_success">Catatan berhasil disimpan</string>
     <string name="channel_name">Penanda Waktu</string>
+    <string name="generate_name">Hasilkan Nama</string>
 </resources>
