@@ -3,15 +3,20 @@ package id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.quiz;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.os.Bundle;
 
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.R;
@@ -26,24 +31,51 @@ public class QuizActivity extends AppCompatActivity {
     public static final String GOLD_MEDAL = "Gold";
     public static final String SILVER_MEDAL = "Silver";
     public static final String BRONZE_MEDAL = "Bronze";
+    private static final int TIMER_NOTIFICATION_ID = 1;
 
     private TimerViewModel timerViewModel;
     private UserViewModel userViewModel;
+    private boolean isForeground;
 
     private BroadcastReceiver br = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             int time = intent.getExtras().getInt("countdown");
+            NotificationManagerCompat notificationManager
+                    = NotificationManagerCompat.from(getApplicationContext());
+
             if (time == 0) {
                 timerViewModel.setTimerFinished(true);
+                if (!isForeground) {
+                    notificationManager.notify(TIMER_NOTIFICATION_ID,
+                            createNotification("Time's up").build());
+                }
+                return;
             }
+
             timerViewModel.setTime(time);
+            if (!isForeground) {
+                notificationManager.notify(TIMER_NOTIFICATION_ID,
+                        createNotification("Remaining time: " + time).build());
+            }
+        }
+
+        private NotificationCompat.Builder createNotification(String contentText) {
+            return new NotificationCompat
+                    .Builder(getApplicationContext(), "Timer")
+                    .setSmallIcon(R.drawable.ic_launcher_foreground)
+                    .setContentTitle("Quiz time")
+                    .setContentText(contentText)
+                    .setPriority(NotificationCompat.PRIORITY_LOW)
+                    .setOngoing(true)
+                    .setOnlyAlertOnce(true);
         }
     };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        createNotificationChannel();
         DataBindingUtil.setContentView(this, R.layout.activity_quiz);
 
         userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
@@ -112,5 +144,28 @@ public class QuizActivity extends AppCompatActivity {
     protected void onDestroy() {
         unregisterReceiver(br);
         super.onDestroy();
+    }
+
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.channel_name);
+            int importance = NotificationManager.IMPORTANCE_LOW;
+            NotificationChannel channel = new NotificationChannel("Timer", name, importance);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        isForeground = true;
+        NotificationManagerCompat.from(getApplicationContext()).cancel(TIMER_NOTIFICATION_ID);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        isForeground = false;
     }
 }

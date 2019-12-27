@@ -62,5 +62,5 @@
     </string>
     <string name="save_notes">Save Note</string>
     <string name="save_notes_success">The note saved successfully</string>
-
+    <string name="channel_name">Timer</string>
 </resources>
