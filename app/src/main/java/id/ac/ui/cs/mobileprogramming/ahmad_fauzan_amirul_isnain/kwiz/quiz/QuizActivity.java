@@ -50,25 +50,25 @@ public class QuizActivity extends AppCompatActivity {
                 timerViewModel.setTimerFinished(true);
                 if (!isForeground) {
                     notificationManager.notify(TIMER_NOTIFICATION_ID,
-                            createNotification("Time's up").build());
+                            createNotification("Time's up", false).build());
                 }
                 return;
             }
 
             if (!isForeground) {
                 notificationManager.notify(TIMER_NOTIFICATION_ID,
-                        createNotification("Remaining time: " + time).build());
+                        createNotification("Remaining time: " + time, true).build());
             }
         }
 
-        private NotificationCompat.Builder createNotification(String contentText) {
+        private NotificationCompat.Builder createNotification(String contentText, boolean ongoing) {
             return new NotificationCompat
                     .Builder(getApplicationContext(), "Timer")
                     .setSmallIcon(R.drawable.ic_launcher_foreground)
                     .setContentTitle("Quiz time")
                     .setContentText(contentText)
                     .setPriority(NotificationCompat.PRIORITY_LOW)
-                    .setOngoing(true)
+                    .setOngoing(ongoing)
                     .setOnlyAlertOnce(true);
         }
     };
