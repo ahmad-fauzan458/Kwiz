@@ -21,6 +21,9 @@ Java_id_ac_ui_cs_mobileprogramming_ahmad_1fauzan_1amirul_1isnain_kwiz_HomeFragme
     int count = 0;
 
     for(int i = 0; i < length; i++) {
+        if (i == 7) {
+            name = name + " ";
+        }
 
         if(i%2 != 0) {
             name = name + consonents[rand() % 19];

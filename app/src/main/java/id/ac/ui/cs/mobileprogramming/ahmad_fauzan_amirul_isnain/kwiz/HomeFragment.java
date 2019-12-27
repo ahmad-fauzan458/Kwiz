@@ -54,17 +54,12 @@ public class HomeFragment extends Fragment implements HomeInterface {
     }
 
     public void generateName(){
-        userViewModel.setName(generateNameHelper());
-    }
-
-    private String generateNameHelper(){
         String name = generateName(GENERATE_NAME_LENGTH);
         if (name.equals(userViewModel.getName().getValue())){
-            name = generateNameHelper();
+            name = generateName(GENERATE_NAME_LENGTH + 7);
         }
-        return name;
+        userViewModel.setName(name);
     }
 
     public native String generateName(int length);
-
 }
