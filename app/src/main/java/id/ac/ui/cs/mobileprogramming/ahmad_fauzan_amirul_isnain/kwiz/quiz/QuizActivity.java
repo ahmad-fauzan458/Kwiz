@@ -7,24 +7,39 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
-import android.os.AsyncTask;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.R;
+import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.TimerService;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.TimerViewModel;
 import id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.viewmodels.UserViewModel;
 
 public class QuizActivity extends AppCompatActivity {
 
-    public static final Integer QUIZ_TIME = 100;
-    public static final Integer CORRECT_SCORE = 100;
+    public static final int QUIZ_TIME_MS = 100000;
+    public static final int CORRECT_SCORE = 100;
     public static final String GOLD_MEDAL = "Gold";
     public static final String SILVER_MEDAL = "Silver";
     public static final String BRONZE_MEDAL = "Bronze";
 
     private TimerViewModel timerViewModel;
     private UserViewModel userViewModel;
+
+    private BroadcastReceiver br = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            int time = intent.getExtras().getInt("countdown");
+            if (time == 0) {
+                timerViewModel.setTimerFinished(true);
+            }
+            timerViewModel.setTime(time);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +60,8 @@ public class QuizActivity extends AppCompatActivity {
             }
         };
         timerViewModel.getTimerFinished().observe(this, timerFinishedObserver);
+
+        registerReceiver(br, new IntentFilter(TimerService.TIMER_BR));
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
@@ -75,22 +92,25 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     public void startTimer(){
-        if (timerViewModel != null) {
-            timerViewModel.setTimerAsync(QuizActivity.QUIZ_TIME);
-            timerViewModel.getTimerAsync().execute();
-        }
+        Intent intent = new Intent(this, TimerService.class);
+        intent.putExtra("quizTime", QUIZ_TIME_MS);
+        startService(intent);
     }
 
     public  void stopTimer(){
-        if (timerViewModel != null
-                && timerViewModel.getTimerAsync().getStatus() != AsyncTask.Status.FINISHED){
-            timerViewModel.getTimerAsync().cancel(true);
-        }
+        Intent intent = new Intent(this, TimerService.class);
+        stopService(intent);
     }
 
     private void showQuizResult(){
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.quizContent, QuizResultFragment.newInstance())
                 .commit();
+    }
+
+    @Override
+    protected void onDestroy() {
+        unregisterReceiver(br);
+        super.onDestroy();
     }
 }
