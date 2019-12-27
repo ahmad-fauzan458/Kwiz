@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".SplashScreenActivity">
 
-    <id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.OpenGLView
+    <id.ac.ui.cs.mobileprogramming.ahmad_fauzan_amirul_isnain.kwiz.opengl.OpenGLView
         android:id="@+id/openGLView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
