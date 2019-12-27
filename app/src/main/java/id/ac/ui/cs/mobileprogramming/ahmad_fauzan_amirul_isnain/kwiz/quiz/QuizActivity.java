@@ -44,6 +44,8 @@ public class QuizActivity extends AppCompatActivity {
             NotificationManagerCompat notificationManager
                     = NotificationManagerCompat.from(getApplicationContext());
 
+            timerViewModel.setTime(time);
+
             if (time == 0) {
                 timerViewModel.setTimerFinished(true);
                 if (!isForeground) {
@@ -53,7 +55,6 @@ public class QuizActivity extends AppCompatActivity {
                 return;
             }
 
-            timerViewModel.setTime(time);
             if (!isForeground) {
                 notificationManager.notify(TIMER_NOTIFICATION_ID,
                         createNotification("Remaining time: " + time).build());
